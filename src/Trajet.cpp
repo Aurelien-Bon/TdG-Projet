@@ -119,3 +119,11 @@ float Trajet::getReelTemps()
 {
     return m_reelTemps;
 }
+void Trajet::setSelec(bool selec)
+{
+    m_selec=selec;
+}
+bool Trajet::getSelec()
+{
+    return m_selec;
+}

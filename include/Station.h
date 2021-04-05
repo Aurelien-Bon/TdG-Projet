@@ -22,13 +22,14 @@ public:
     float CalculTempsCoef(Trajet traj);
     void AffichagePoint();
     void AffichageTrajet();
-    void dijkstra();
-    void bfs();
+    void dijkstra(int debut, int fin);
+    bool bfs(int debut,int fin);
     float CalculTemps(Trajet traj);
     void Critere();
     void reecritureFicher();
     std::string affichageTemps(float temps);
-
+    void Trajet2point();
+    void SelectionTrajet();
 };
 
 

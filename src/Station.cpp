@@ -198,39 +198,12 @@ void Station::AffichageTrajet()
     std::cout<<" en utilisant "<<m_trajet[choix-1].TradType();
     std::cout<<", vous mettrez " << affichageTemps(m_trajet[choix-1].getReelTemps())<<std::endl;
 }
-void Station::dijkstra()
+void Station::dijkstra(int debut, int fin)
 {
     for(auto& elem:m_trajet)
     {
         elem.setTemps(CalculTempsCoef(elem));
-        std::cout <<elem.getNbTrajet()<<" | "<<elem.getTemps()<<" ";
     }
-    std::cout<<std::endl;
-    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
-    for(auto& elem:m_lieu)
-    {
-        std::cout<<elem.getNbLieu()<<". Lieu: ";
-        std::cout<<elem.getLieu()<<" a ";
-        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
-    }
-    int debut=0;
-    do
-    {
-        std::cin>>debut;
-    }while(debut<0 || debut>m_nbLieu);
-    system("cls");
-    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
-    for(auto& elem:m_lieu)
-    {
-        std::cout<<elem.getNbLieu()<<". Lieu: ";
-        std::cout<<elem.getLieu()<<" a ";
-        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
-    }
-    int fin=0;
-    do
-    {
-        std::cin>>fin;
-    }while(fin<0 || fin>m_nbLieu||fin==debut);
     for(auto& elem:m_lieu)    // pour chaque sommetn on considère qu'ils n'ont pas encore été visité, de plus on met leur couleur a blanc et on leur assigne un poids impossible
     {
         elem.setColor(0);
@@ -348,26 +321,15 @@ void Station::dijkstra()
     std::cout<< " Pour une duree totale de "<<affichageTemps(totalTemps)<<std::endl;
     std::cout<<"----------------------------"<<std::endl;
 }
-void Station::bfs()
+bool Station::bfs(int debut, int fin)
 {
+    SelectionTrajet();
+    bool possible;
     for(auto& elem:m_trajet)
     {
         elem.setTemps(CalculTemps(elem));
     }
-    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
-    for(auto& elem:m_lieu)
-    {
-        std::cout<<elem.getNbLieu()<<". Lieu: ";
-        std::cout<<elem.getLieu()<<" a ";
-        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
-    }
-    int debut=0;
-    do
-    {
-        std::cin>>debut;
-    }while(debut<0 || debut>m_nbLieu);
     system("cls");
-
     std::queue<Lieu> fileTrait;//file pour la traite du BFS
     for(auto& elem:m_lieu)
     {
@@ -381,7 +343,7 @@ void Station::bfs()
         Lieu trait=fileTrait.front();//copie du sommet a traiter
         for(auto& succ:m_trajet)//lecture de tout ses successeur
         {
-            if(succ.getDebut()==trait.getNbLieu())
+            if(succ.getDebut()==trait.getNbLieu()&&succ.getSelec()==true)
                 if(m_lieu[succ.getFin()-1].getColor()==0)//on recupere tout les sommet pas encore visiter
                 {
                     m_lieu[succ.getFin()-1].setColor(1);//on les passe en gris
@@ -392,28 +354,15 @@ void Station::bfs()
         trait.setColor(2);//on met en noir le sommet on l'on a deja visiter tout ses suivant
         fileTrait.pop();//on enleve le sommet traiter de la pile
     }
-
-    std::cout<<"----------------------------"<<std::endl;
-    std::cout<<"Parcours du BFS a partir du lieu "<<debut<<": "<<std::endl;
-    for(auto& elem:m_lieu)
+    if(m_lieu[fin-1].getVisite()==-1)
     {
-        int anteBfs = elem.getVisite();//on recupere le predecesseur de chaque sommet
-        if(anteBfs!=(-1))//si le sommet a des perdecesseur
-        {
-            std::cout<<elem.getNbLieu();
-            while(true)
-            {
-                if(anteBfs!=(-1))
-                {
-                    std::cout<<" <-- "<< anteBfs;
-                    anteBfs= m_lieu[anteBfs-1].getVisite();//on recupere le predecesseur de chaque sommet
-                }
-                else break;
-            }
-            std::cout<<std::endl;
-        }
+        possible=false;
     }
-    std::cout<<"----------------------------"<<std::endl;
+    else
+    {
+        possible=true;
+    }
+    return possible;
 }
 
 float Station::CalculTemps(Trajet traj)
@@ -509,18 +458,18 @@ void Station::Critere()
     switch(choix)
     {
     case 1:
-        m_coef[0]=500;
-        m_coef[1]=100;
+        m_coef[0]=200;
+        m_coef[1]=50;
         m_mode="Tres bon skieur";
         break;
     case 2:
-        m_coef[3]=500;
+        m_coef[3]=200;
         m_mode="Skieur moyen";
         break;
     case 3:
-        m_coef[6]=500;
-        m_coef[7]=500;
-        m_coef[11]=500;
+        m_coef[6]=200;
+        m_coef[7]=200;
+        m_coef[11]=200;
         m_mode="Sans dechausser";
         break;
     case 4:
@@ -529,17 +478,17 @@ void Station::Critere()
         m_mode="Peur du vide";
         break;
     case 5:
-        m_coef[0]=500;
-        m_coef[1]=500;
+        m_coef[0]=200;
+        m_coef[1]=200;
         m_mode="Professionel";
         break;
     case 6:
-        m_coef[6]=500;
-        m_coef[7]=500;
+        m_coef[6]=200;
+        m_coef[7]=200;
         m_coef[8]=100;
         m_coef[9]=100;
-        m_coef[10]=100;
-        m_coef[11]=500;
+        m_coef[10]=200;
+        m_coef[11]=200;
         m_mode="Visite";
         break;
     case 7:
@@ -603,4 +552,114 @@ std::string Station::affichageTemps(float temps)
     finalhour+=std::to_string(minute)+"m "+std::to_string(seconds)+"s";
     return finalhour;
 
+}
+void Station::Trajet2point()
+{
+    std::cout<<std::endl;
+    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+    for(auto& elem:m_lieu)
+    {
+        std::cout<<elem.getNbLieu()<<". Lieu: ";
+        std::cout<<elem.getLieu()<<" a ";
+        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+    }
+    int debut=0;
+    do
+    {
+        std::cin>>debut;
+    }while(debut<0 || debut>m_nbLieu);
+    system("cls");
+    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+    for(auto& elem:m_lieu)
+    {
+        std::cout<<elem.getNbLieu()<<". Lieu: ";
+        std::cout<<elem.getLieu()<<" a ";
+        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+    }
+    int fin=0;
+    do
+    {
+        std::cin>>fin;
+    }while(fin<0 || fin>m_nbLieu||fin==debut);
+    system("cls");
+    if(bfs(debut,fin)==false)
+    {
+        std::cout << "Impossible d'atteindre le point ";
+        std::cout << m_lieu[fin-1].getLieu() << " depuis ";
+        std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
+        std::cout << "Que voulez vous faire ?"<<std::endl;
+        std::cout << "1. Y allez quand meme mais en respectant au maximum mes condition."<<std::endl;
+        std::cout << "2. Quitter."<<std::endl;
+        int choix;
+        do
+        {
+            std::cin>>choix;
+        }while(choix<0 || choix>2);
+        if(choix==1)
+        {
+            dijkstra(debut,fin);
+        }
+    }
+    else
+    {
+        dijkstra(debut,fin);
+    }
+}
+void Station::SelectionTrajet()
+{
+    for(auto& elem:m_trajet)//reset de la selection des aretes
+    {
+        elem.setSelec(true);
+    }
+    for(auto& elem:m_trajet)
+    {
+        if(elem.getType()=="V"&&m_coef[0]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="B"&&m_coef[1]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="R"&&m_coef[2]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="N"&&m_coef[3]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="KL"&&m_coef[4]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="SURF"&&m_coef[5]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="TPH"&&m_coef[6]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="TC"&&m_coef[7]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="TSD"&&m_coef[8]==100)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="TS"&&m_coef[9]==100)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="TK"&&m_coef[10]==200)
+        {
+            elem.setSelec(false);
+        }
+        if(elem.getType()=="BUS"&&m_coef[11]==200)
+        {
+            elem.setSelec(false);
+        }
+    }
 }

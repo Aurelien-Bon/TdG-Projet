@@ -12,6 +12,7 @@ private:
     int m_B;        // une arete dispose d'un point A et B départ -- > arrivée ainsi qu'un poids assigné à cette arete
     float m_temps;
     float m_reelTemps;
+    bool m_selec;
 public:
     Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b);
     ~Trajet();
@@ -26,6 +27,8 @@ public:
     std::string TradType();
     void setReelTemps(float temps);
     float getReelTemps();
+    void setSelec(bool selec);
+    bool getSelec();
 };
 
 
