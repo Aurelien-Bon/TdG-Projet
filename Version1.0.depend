@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1617632563 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\main.cpp
+	<iostream>
+	"Station.h"
+	"windows.h"
+
+1617631289 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\src\trajet.cpp
+	"Trajet.h"
+	"windows.h"
+
+1617631289 c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\include\trajet.h
+	<iostream>
+
+1617631374 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\src\lieu.cpp
+	"Lieu.h"
+	<iostream>
+
+1617631311 c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\include\lieu.h
+	<iostream>
+
+1617631289 c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\include\station.h
+	"Trajet.h"
+	"Lieu.h"
+	<iostream>
+	<vector>
+
+1617632594 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\version1.0\src\station.cpp
+	"Station.h"
+	<fstream>
+	<string>
+	<queue>
+	<stack>
+
