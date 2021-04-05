@@ -2,29 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1286" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="include\Trajet.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="542" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Lieu.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="207" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Trajet.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2394" topLine="58" />
-		</Cursor>
-	</File>
-	<File name="include\Station.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="298" topLine="0" />
+			<Cursor1 position="178" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\Lieu.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
@@ -32,9 +12,43 @@
 			<Cursor1 position="349" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Station.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="include\Trajet.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="14359" topLine="395" />
+			<Cursor1 position="627" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="src\Trajet.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2504" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="include\Station.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="799" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="src\Station.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="20960" topLine="163" />
+		</Cursor>
+		<Folding>
+			<Collapse line="6" />
+			<Collapse line="17" />
+			<Collapse line="55" />
+			<Collapse line="60" />
+			<Collapse line="127" />
+			<Collapse line="140" />
+			<Collapse line="178" />
+			<Collapse line="201" />
+			<Collapse line="368" />
+			<Collapse line="502" />
+			<Collapse line="527" />
+			<Collapse line="556" />
+		</Folding>
+	</File>
+	<File name="src\Lieu.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="207" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
