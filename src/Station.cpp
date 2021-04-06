@@ -752,6 +752,8 @@ void Station::FordFercuson()
     }
     std::queue<int> resultat;
     int flowfinal=0;
+    int flowmin=0;
+    std::queue<float> resultPetit;
     while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
     {
         int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
@@ -792,6 +794,8 @@ void Station::FordFercuson()
         }
         int r2;
         r2=resul2.front();
+        std::queue<float>save;
+        save.push(r2);
         resul2.pop();
         while(!resul2.empty())//on ajoute le flow a chaque arrete
         {
@@ -803,6 +807,7 @@ void Station::FordFercuson()
                 }
             }
             r2=resul2.front();
+            save.push(r2);
             resul2.pop();
         }
         flowfinal+=flowmax;
@@ -813,6 +818,19 @@ void Station::FordFercuson()
                 elem.setSelec(false);
             }
         }
+        if(flowmin<flowmax)
+        {
+            while(!resultPetit.empty())
+            {
+                resultPetit.pop();
+            }
+            while(!save.empty())
+            {
+                resultPetit.push(save.front());
+                save.pop();
+            }
+            flowmin=flowmax;
+        }
     }
     std::cout<<"La capacite maximale du lieu ";
     std::cout<<m_lieu[debut-1].getLieu()<<" a ";
@@ -821,4 +839,10 @@ void Station::FordFercuson()
     std::cout<<m_lieu[fin-1].getLieu()<<" a ";
     std::cout<<m_lieu[fin-1].getAltitude()<<"m d'altitude"<<std::endl;
     std::cout<<"Est de "<<flowfinal<<" personne par heure."<<std::endl;
+    while(!resultPetit.empty())
+    {
+        std::cout<<resultPetit.front()<<" <---";
+        resultPetit.pop();
+    }
+    std::cout << " avec un flow min de "<< flowmin<<std::endl;
 }
