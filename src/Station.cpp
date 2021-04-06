@@ -130,27 +130,27 @@ int Station::CalculFlow(Trajet traj)
     int flow=9999;
     if(traj.getType()=="V")
     {
-        flow=9999;
+        flow=3000;
     }
     if(traj.getType()=="B")
     {
-       flow=9999;
+       flow=2700;
     }
     if(traj.getType()=="R")
     {
-        flow=9999;
+        flow=2100;
     }
     if(traj.getType()=="N")
     {
-        flow=9999;
+        flow=1200;
     }
     if(traj.getType()=="KL")
     {
-        flow=9999;
+        flow=600;
     }
     if(traj.getType()=="SURF")
     {
-        flow=9999;
+        flow=1000;
     }
     if(traj.getType()=="TPH")
     {
@@ -752,7 +752,7 @@ void Station::FordFercuson()
     }
     std::queue<int> resultat;
     int flowfinal=0;
-    while(bfs(debut,fin)==true)
+    while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
     {
         int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
         if(anteBfs!=(-1))//si le sommet a des perdecesseur
@@ -776,7 +776,6 @@ void Station::FordFercuson()
         int flowmax=9999;
         while(!resultat.empty())//on recupere l'arrte avec le moins de flow
         {
-
             for(auto& elem:m_trajet)
             {
                 if(elem.getFin()==r1&&elem.getDebut()==resultat.front())
@@ -806,7 +805,6 @@ void Station::FordFercuson()
             r2=resul2.front();
             resul2.pop();
         }
-        std::cout<<std::endl;
         flowfinal+=flowmax;
         for(auto& elem:m_trajet)
         {
@@ -816,5 +814,11 @@ void Station::FordFercuson()
             }
         }
     }
-    std::cout<<flowfinal<<std::endl;
+    std::cout<<"La capacite maximale du lieu ";
+    std::cout<<m_lieu[debut-1].getLieu()<<" a ";
+    std::cout<<m_lieu[debut-1].getAltitude()<<"m d'altitude"<<std::endl;
+    std::cout<<"Au lieu ";
+    std::cout<<m_lieu[fin-1].getLieu()<<" a ";
+    std::cout<<m_lieu[fin-1].getAltitude()<<"m d'altitude"<<std::endl;
+    std::cout<<"Est de "<<flowfinal<<" personne par heure."<<std::endl;
 }
