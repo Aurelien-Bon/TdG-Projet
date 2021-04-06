@@ -205,12 +205,17 @@ void Station::afficher()
 }
 void Station::AffichagePoint()
 {
+    system("cls");
+    Goto(160,5);
+    int cpt=1;
     std::cout<<"Choisissez un lieu parmi les suivants:"<<std::endl;
     for(auto& elem:m_lieu)
     {
+        Goto(160,cpt+6);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+        cpt++;
     }
     int choix=0;
     do
@@ -218,27 +223,35 @@ void Station::AffichagePoint()
         std::cin>>choix;
     }while(choix<0 || choix>m_nbLieu);
     system("cls");
+    Goto(160,5);
     std::cout<<"Depuis "<<m_lieu[choix-1].getLieu()<<", vous pouvez prendre: "<<std::endl;
-    Goto(50,10);
+
+    cpt=1;
     for(auto& elem:m_trajet)
     {
         if(elem.getDebut()==choix)
         {
+            Goto(160,cpt+6);
             std::cout << "Le trajet numero " << elem.getNbTrajet() << " vers ";
             std::cout << m_trajet[elem.getFin()-1].getNomTrajet()<<" en utilisant ";
             std::cout << elem.TradType()<<" pour une duree de ";
             std::cout << affichageTemps(elem.getReelTemps()) << " minute"<<std::endl;
+            cpt++;
         }
     }
+    Goto(160,9+cpt);
     std::cout<<"Vous pouvez aller a "<<m_lieu[choix-1].getLieu()<<" en prenant: "<<std::endl;
+
     for(auto& elem:m_trajet)
     {
-        if(elem.getFin()==choix)
-        {
+        if(elem.getFin()==choix){
+
+            Goto(160,cpt+11);
             std::cout << "Le trajet numero " << elem.getNbTrajet() << " depuis ";
             std::cout << m_trajet[elem.getDebut()-1].getNomTrajet()<<" en utilisant ";
             std::cout << elem.TradType()<<" pour une duree de ";
             std::cout << affichageTemps(elem.getReelTemps())<<std::endl;
+            cpt++;
         }
     }
     delay(10000);
@@ -247,31 +260,37 @@ void Station::AffichagePoint()
 void Station::AffichageTrajet()
 {
     int cpt=5;
-    std::cout<<"Veuillez saisir le trajet qui vous interesse"<<std::endl;
+
+    system("cls");
+
     for(auto& elem:m_trajet)
     {
         Goto(4,cpt);
         std::cout << "Trajet n" << elem.getNbTrajet();
-        Goto(20,cpt);
+        Goto(40,cpt);
         std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
-        Goto(50,cpt);
+        Goto(70,cpt);
         std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
-        Goto(80,cpt);
-        std::cout <<"via "<< elem.TradType();
         Goto(100,cpt);
+        std::cout <<"via "<< elem.TradType();
+        Goto(120,cpt);
         std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
         cpt++;
     }
+    std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
     int choix=0;
     do{
         std::cin>>choix;
     }while(choix<0 || choix>m_nbTrajet);
     system("cls");
+    Goto(160,5);
     std::cout<<"Vous empruntez le trajet : "<<m_trajet[choix-1].getNomTrajet();
     std::cout<<" pour aller de "<< m_lieu[m_trajet[choix-1].getDebut()-1].getLieu();
     std::cout<<" vers "<<m_lieu[m_trajet[choix-1].getFin()-1].getLieu();
     std::cout<<" en utilisant "<<m_trajet[choix-1].TradType();
     std::cout<<", vous mettrez " << affichageTemps(m_trajet[choix-1].getReelTemps())<<std::endl;
+    delay(5000);
+    system("cls");
 }
 void Station::dijkstra(int debut, int fin)
 {
