@@ -1,4 +1,13 @@
 #include "Trajet.h"
+#include "windows.h"
+void Goto(int col)
+{
+    COORD mycoord;
+    mycoord.X = col;
+    //mycoord.Y = getNb();
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
+}
+
 Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b)
 {
     m_nbTrajet = nbTrajet;
@@ -94,7 +103,7 @@ std::string Trajet::TradType()
     }
     if(m_type=="TK")
     {
-           ecrit="une teleski";
+           ecrit="un teleski";
     }
     if(m_type=="BUS")
     {

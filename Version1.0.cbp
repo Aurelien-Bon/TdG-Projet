@@ -37,12 +37,10 @@
 		<Unit filename="include/Lieu.h" />
 		<Unit filename="include/Station.h" />
 		<Unit filename="include/Trajet.h" />
-		<Unit filename="include/menu.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Lieu.cpp" />
 		<Unit filename="src/Station.cpp" />
 		<Unit filename="src/Trajet.cpp" />
-		<Unit filename="src/menu.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -2,7 +2,7 @@
 #include "menu.h"
 Menu::Menu()
 {
-    Station lesArc("data_arcs.txt");
+    //Station lesArc("data_arcs.txt");
     m_station=lesArc;
 }
 Menu::~Menu(){}

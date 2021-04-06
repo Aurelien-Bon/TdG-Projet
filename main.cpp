@@ -10,7 +10,9 @@ void Gotom(int col, int nb)
 }
 int main()
 {
-    Station test("data_arcs.txt");
+    std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
+    SetWindowPos(0,0,1920,1080);
+        Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
     Gotom(50,4);
@@ -18,9 +20,9 @@ int main()
     bool quitter=false;
     do
     {
-        Gotom(50,6);
+        Gotom(100,6);
         std::cout << "1. Choisir un trajet"<<std::endl;
-          Gotom(50,7);
+          Gotom(100,7);
         std::cout << "2. Choisir un lieu"<<std::endl;
           Gotom(50,8);
         std::cout << "3. Choix d'un chemin entre 2 lieu"<<std::endl;
