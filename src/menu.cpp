@@ -1,9 +1,7 @@
 #include <iostream>
 #include "menu.h"
-//Menu::Menu(){}
 Menu::Menu()
 {
-//    m_graphi=graph;
     Station lesArc("data_arcs.txt");
     m_station=lesArc;
 }
