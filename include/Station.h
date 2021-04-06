@@ -4,6 +4,7 @@
 #include "Lieu.h"
 #include <iostream>
 #include <vector>
+//#include "Graphique.h"
 class Station
 {
 private:
@@ -14,8 +15,10 @@ private:
     std::vector<int> m_coef;
     std::string m_mode;
     std::string m_filename;
+//    Graphique m_graph;
 
 public:
+    Station();
     Station(std::string filename);
     ~Station();
     void afficher();

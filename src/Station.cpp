@@ -14,8 +14,10 @@ public:
     }
 };
 
+Station::Station(){}
 Station::Station(std::string filename)
 {
+//    m_graph=graph;
     m_filename=filename;
     std::ifstream ifs{filename};  // ouverture du flux de lecture
     if (!ifs)
