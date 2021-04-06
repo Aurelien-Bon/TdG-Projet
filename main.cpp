@@ -11,8 +11,8 @@ void Gotom(int col, int nb)
 int main()
 {
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
-    SetWindowPos(0,0,1920,1080);
-        Station test("data_arcs.txt");
+    system("mode con cols=1920 lines=1080");
+    Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
     Gotom(50,4);
