@@ -32,6 +32,7 @@ public:
     void Trajet2point();
     void SelectionTrajet();
     void FordFercuson();
+    void Flotmin2pts();
 };
 
 
