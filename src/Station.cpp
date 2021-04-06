@@ -748,6 +748,7 @@ void Station::FordFercuson()
     for(auto& elem:m_trajet)
     {
         elem.setFlow(0);
+        elem.setSelec(true);
     }
     std::queue<int> resultat;
     int flowfinal=0;
