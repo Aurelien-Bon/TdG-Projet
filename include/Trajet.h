@@ -13,6 +13,8 @@ private:
     float m_temps;
     float m_reelTemps;
     bool m_selec;
+    int m_flow;
+    int m_flowMax;
 public:
     Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b);
     ~Trajet();
@@ -29,6 +31,10 @@ public:
     float getReelTemps();
     void setSelec(bool selec);
     bool getSelec();
+    void setFlow(int flow);
+    void setMaxFlow(int flowMax);
+    int getFlow();
+    int getMaxFlow();
 };
 
 

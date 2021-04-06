@@ -38,6 +38,7 @@ Station::Station(std::string filename)
         ifs >>nbTrajet>>nomTrajet>>typeTrajet>> a >> b;
         Trajet n(nbTrajet,nomTrajet,typeTrajet,a,b);    // on crée une arete avec sommet de départ et d'arrivée en comptant à la suite du poids de cette arete
         n.setReelTemps(CalculTemps(n));
+        n.setMaxFlow(CalculFlow(n));
         m_trajet.push_back(n);
     }
     for(int i=0;i<12;i++)
@@ -123,6 +124,59 @@ float Station::CalculTempsCoef(Trajet traj)
             temps=40*m_coef[11];
     }
     return temps;
+}
+int Station::CalculFlow(Trajet traj)
+{
+    int flow=9999;
+    if(traj.getType()=="V")
+    {
+        flow=9999;
+    }
+    if(traj.getType()=="B")
+    {
+       flow=9999;
+    }
+    if(traj.getType()=="R")
+    {
+        flow=9999;
+    }
+    if(traj.getType()=="N")
+    {
+        flow=9999;
+    }
+    if(traj.getType()=="KL")
+    {
+        flow=9999;
+    }
+    if(traj.getType()=="SURF")
+    {
+        flow=9999;
+    }
+    if(traj.getType()=="TPH")
+    {
+        flow=1200;
+    }
+    if(traj.getType()=="TC")
+    {
+        flow=2200;
+    }
+    if(traj.getType()=="TSD")
+    {
+        flow=2500;
+    }
+    if(traj.getType()=="TS")
+    {
+        flow=1800;
+    }
+    if(traj.getType()=="TK")
+    {
+        flow=800;
+    }
+    if(traj.getType()=="BUS")
+    {
+        flow=300;
+    }
+    return flow;
 }
 void Station::afficher()
 {
@@ -323,13 +377,7 @@ void Station::dijkstra(int debut, int fin)
 }
 bool Station::bfs(int debut, int fin)
 {
-    SelectionTrajet();
     bool possible;
-    for(auto& elem:m_trajet)
-    {
-        elem.setTemps(CalculTemps(elem));
-    }
-    system("cls");
     std::queue<Lieu> fileTrait;//file pour la traite du BFS
     for(auto& elem:m_lieu)
     {
@@ -582,6 +630,11 @@ void Station::Trajet2point()
         std::cin>>fin;
     }while(fin<0 || fin>m_nbLieu||fin==debut);
     system("cls");
+    SelectionTrajet();
+    for(auto& elem:m_trajet)
+    {
+        elem.setTemps(CalculTemps(elem));
+    }
     if(bfs(debut,fin)==false)
     {
         std::cout << "Impossible d'atteindre le point ";
@@ -662,4 +715,105 @@ void Station::SelectionTrajet()
             elem.setSelec(false);
         }
     }
+}
+void Station::FordFercuson()
+{
+    std::cout<<std::endl;
+    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+    for(auto& elem:m_lieu)
+    {
+        std::cout<<elem.getNbLieu()<<". Lieu: ";
+        std::cout<<elem.getLieu()<<" a ";
+        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+    }
+    int debut=0;
+    do
+    {
+        std::cin>>debut;
+    }while(debut<0 || debut>m_nbLieu);
+    system("cls");
+    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+    for(auto& elem:m_lieu)
+    {
+        std::cout<<elem.getNbLieu()<<". Lieu: ";
+        std::cout<<elem.getLieu()<<" a ";
+        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+    }
+    int fin=0;
+    do
+    {
+        std::cin>>fin;
+    }while(fin<0 || fin>m_nbLieu||fin==debut);
+    system("cls");
+    for(auto& elem:m_trajet)
+    {
+        elem.setFlow(0);
+    }
+    std::queue<int> resultat;
+    int flowfinal=0;
+    while(bfs(debut,fin)==true)
+    {
+        int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
+        if(anteBfs!=(-1))//si le sommet a des perdecesseur
+        {
+            resultat.push(m_lieu[fin-1].getNbLieu());
+            while(true)
+            {
+                if(anteBfs!=(-1))
+                {
+                    resultat.push(m_lieu[anteBfs-1].getNbLieu());
+                    anteBfs= m_lieu[anteBfs-1].getVisite();//on recupere le predecesseur de chaque sommet
+                }
+                else break;
+            }
+        }
+        int r1;
+        std::queue<int> resul2;
+        r1=resultat.front();
+        resul2.push(r1);
+        resultat.pop();
+        int flowmax=9999;
+        while(!resultat.empty())//on recupere l'arrte avec le moins de flow
+        {
+
+            for(auto& elem:m_trajet)
+            {
+                if(elem.getFin()==r1&&elem.getDebut()==resultat.front())
+                {
+                    if(elem.getMaxFlow()-elem.getFlow()<flowmax)
+                    {
+                        flowmax=elem.getMaxFlow()-elem.getFlow();
+                    }
+                }
+            }
+            r1=resultat.front();
+            resul2.push(r1);
+            resultat.pop();
+        }
+        int r2;
+        r2=resul2.front();
+        resul2.pop();
+        while(!resul2.empty())//on ajoute le flow a chaque arrete
+        {
+            for(auto& elem:m_trajet)
+            {
+                if(elem.getFin()==r2&&elem.getDebut()==resul2.front())
+                {
+                    elem.setFlow(elem.getFlow()+flowmax);
+                }
+            }
+            r2=resul2.front();
+            resul2.pop();
+        }
+        std::cout<<std::endl;
+        flowfinal+=flowmax;
+        for(auto& elem:m_trajet)
+        {
+            if(elem.getFlow()==elem.getMaxFlow())
+            {
+                elem.setSelec(false);
+            }
+        }
+    }
+    std::cout<<flowfinal<<std::endl;
 }

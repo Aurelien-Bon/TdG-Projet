@@ -20,6 +20,7 @@ public:
     ~Station();
     void afficher();
     float CalculTempsCoef(Trajet traj);
+    int CalculFlow(Trajet traj);
     void AffichagePoint();
     void AffichageTrajet();
     void dijkstra(int debut, int fin);
@@ -30,6 +31,7 @@ public:
     std::string affichageTemps(float temps);
     void Trajet2point();
     void SelectionTrajet();
+    void FordFercuson();
 };
 
 

@@ -127,3 +127,19 @@ bool Trajet::getSelec()
 {
     return m_selec;
 }
+void Trajet::setFlow(int flow)
+{
+    m_flow=flow;
+}
+void Trajet::setMaxFlow(int flowMax)
+{
+    m_flowMax=flowMax;
+}
+int Trajet::getFlow()
+{
+    return m_flow;
+}
+int Trajet::getMaxFlow()
+{
+    return m_flowMax;
+}
