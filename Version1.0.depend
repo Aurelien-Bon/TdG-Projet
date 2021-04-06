@@ -38,25 +38,23 @@
 1617643707 c:\users\aurel\documents\github\tdg-projet\include\lieu.h
 	<iostream>
 
-1617699016 source:c:\users\aurel\documents\github\tdg-projet\src\trajet.cpp
+1617719856 source:c:\users\aurel\documents\github\tdg-projet\src\trajet.cpp
 	"Trajet.h"
-	"windows.h"
 
 1617699005 c:\users\aurel\documents\github\tdg-projet\include\trajet.h
 	<iostream>
 
-1617700212 source:c:\users\aurel\documents\github\tdg-projet\main.cpp
+1617723805 source:c:\users\aurel\documents\github\tdg-projet\main.cpp
 	<iostream>
-	"Station.h"
-	"windows.h"
+	"menu.h"
 
-1617700107 c:\users\aurel\documents\github\tdg-projet\include\station.h
+1617723554 c:\users\aurel\documents\github\tdg-projet\include\station.h
 	"Trajet.h"
 	"Lieu.h"
 	<iostream>
 	<vector>
 
-1617702644 source:c:\users\aurel\documents\github\tdg-projet\src\station.cpp
+1617723684 source:c:\users\aurel\documents\github\tdg-projet\src\station.cpp
 	"Station.h"
 	<fstream>
 	<string>
@@ -97,4 +95,42 @@
 1617700659 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\github\tdg-projet\src\trajet.cpp
 	"Trajet.h"
 	"windows.h"
+
+1617719161 source:c:\users\aurel\documents\github\tdg-projet\graphique.cpp
+	"Graphique.h"
+
+1617719420 c:\users\aurel\documents\github\tdg-projet\graphique.h
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+	<iostream>
+
+1617720763 source:c:\users\aurel\documents\github\tdg-projet\src\graphique.cpp
+	"Graphique.h"
+
+1617721286 c:\users\aurel\documents\github\tdg-projet\include\graphique.h
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+	<iostream>
+
+1617720738 source:c:\users\aurel\documents\github\tdg-projet\menu.cpp
+	<iostream>
+	"Station.h"
+
+1617720738 c:\users\aurel\documents\github\tdg-projet\menu.cpp
+	<iostream>
+	"Station.h"
+
+1617721788 c:\users\aurel\documents\github\tdg-projet\include\menue.h
+	"Station.h"
+
+1617723891 source:c:\users\aurel\documents\github\tdg-projet\src\menu.cpp
+	<iostream>
+	"menu.h"
+
+1617723554 c:\users\aurel\documents\github\tdg-projet\include\menu.h
+	"Station.h"
 

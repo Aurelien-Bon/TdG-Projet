@@ -1,13 +1,4 @@
 #include "Trajet.h"
-#include "windows.h"
-void Goto(int col)
-{
-    COORD mycoord;
-    mycoord.X = col;
-    //mycoord.Y = getNb();
-    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
-}
-
 Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b)
 {
     m_nbTrajet = nbTrajet;
