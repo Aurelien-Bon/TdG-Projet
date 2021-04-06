@@ -4,6 +4,8 @@
 #include "Lieu.h"
 #include <iostream>
 #include <vector>
+#include <windows.h>
+
 class Station
 {
 private:
@@ -32,7 +34,7 @@ public:
     void Trajet2point();
     void SelectionTrajet();
     void FordFercuson();
-    void Flotmin2pts();
+    //void Flotmin2pts();
 };
 
 

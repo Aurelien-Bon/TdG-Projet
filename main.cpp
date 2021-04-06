@@ -1,21 +1,38 @@
 #include <iostream>
 #include "Station.h"
 #include "windows.h"
+void Gotom(int col, int nb)
+{
+    COORD mycoord;
+    mycoord.X = col;
+    mycoord.Y = nb;
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
+}
 int main()
 {
     Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
+    Gotom(50,4);
+    std::cout<<"Application"<<std::endl;
     bool quitter=false;
     do
     {
+        Gotom(50,6);
         std::cout << "1. Choisir un trajet"<<std::endl;
+          Gotom(50,7);
         std::cout << "2. Choisir un lieu"<<std::endl;
+          Gotom(50,8);
         std::cout << "3. Choix d'un chemin entre 2 lieu"<<std::endl;
+          Gotom(50,9);
         std::cout << "4. Critere de selection des chemins"<<std::endl;
+          Gotom(50,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
+          Gotom(50,11);
         std::cout << "6. Quitter"<<std::endl;
+          Gotom(50,12);
         std::cout << "Que voulez-vous faire?: ";
+         Gotom(50,13);
         int choix=0;
         do
         {

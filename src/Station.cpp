@@ -3,6 +3,8 @@
 #include <string>
 #include <queue>
 #include <stack>
+#include "chrono"
+#include "thread"
 class myComparator///geeksforgeeks.org modifier par Aurélien Bon
 {
 public:
@@ -13,7 +15,17 @@ public:
         return a1.getTemps() > a2.getTemps();
     }
 };
+void Goto(int col, int nb)
+{
+    COORD mycoord;
+    mycoord.X = col;
+    mycoord.Y = nb;
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
+}
+void delay(int delay_time){ // Créer un temps d'attente
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
+}
 Station::Station(std::string filename)
 {
     m_filename=filename;
@@ -207,6 +219,7 @@ void Station::AffichagePoint()
     }while(choix<0 || choix>m_nbLieu);
     system("cls");
     std::cout<<"Depuis "<<m_lieu[choix-1].getLieu()<<", vous pouvez prendre: "<<std::endl;
+    Goto(50,10);
     for(auto& elem:m_trajet)
     {
         if(elem.getDebut()==choix)
@@ -228,18 +241,26 @@ void Station::AffichagePoint()
             std::cout << affichageTemps(elem.getReelTemps())<<std::endl;
         }
     }
+    delay(10000);
+    system("cls");
 }
 void Station::AffichageTrajet()
 {
-
+    int cpt=5;
     std::cout<<"Veuillez saisir le trajet qui vous interesse"<<std::endl;
     for(auto& elem:m_trajet)
     {
-        std::cout << "Le trajet numero " << elem.getNbTrajet() << " depuis ";
-        std::cout << m_trajet[elem.getDebut()-1].getNomTrajet()<<" vers ";
-        std::cout << m_trajet[elem.getFin()-1].getNomTrajet()<<" en utilisant ";
-        std::cout << elem.TradType()<<" pour une duree de ";
-        std::cout << affichageTemps(elem.getReelTemps())<<std::endl;
+        Goto(4,cpt);
+        std::cout << "Trajet n" << elem.getNbTrajet();
+        Goto(20,cpt);
+        std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+        Goto(50,cpt);
+        std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+        Goto(80,cpt);
+        std::cout <<"via "<< elem.TradType();
+        Goto(100,cpt);
+        std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+        cpt++;
     }
     int choix=0;
     do{
