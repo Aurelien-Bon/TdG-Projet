@@ -217,6 +217,7 @@ void Station::AffichagePoint()
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
         cpt++;
     }
+    Goto(210,5);
     int choix=0;
     do
     {
@@ -265,18 +266,19 @@ void Station::AffichageTrajet()
 
     for(auto& elem:m_trajet)
     {
-        Goto(4,cpt);
+        Goto(44,cpt);
         std::cout << "Trajet n" << elem.getNbTrajet();
-        Goto(40,cpt);
+        Goto(80,cpt);
         std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
-        Goto(70,cpt);
+        Goto(110,cpt);
         std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
-        Goto(100,cpt);
+        Goto(150,cpt);
         std::cout <<"via "<< elem.TradType();
-        Goto(120,cpt);
+        Goto(170,cpt);
         std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
         cpt++;
     }
+    Goto(200,150);
     std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
     int choix=0;
     do{
@@ -390,8 +392,11 @@ void Station::dijkstra(int debut, int fin)
         }
     }
     system("cls");
-    std::cout<<"----------------------------"<<std::endl;
-    std::cout<<"Voici l'itineraire le plus rapide de "<<m_lieu[debut-1].getLieu()<<" jusqu'a "<<m_lieu[fin-1].getLieu()<<" avec le mode "<<m_mode<<" actif: "<<std::endl;
+    int cpt=1;
+    Goto(150,cpt+5);
+    std::cout<<"-----------------------------------------------------------------------------------------------------"<<std::endl;
+    Goto(150,cpt+6);
+    std::cout<<"Voici l'itineraire le plus rapide de "<<m_lieu[debut-1].getLieu()<<" jusqu'a "<<m_lieu[fin-1].getLieu()<<" avec le mode "<<m_mode<<" actif:\n "<<std::endl;
     anteDij=reponse.top();
     reponse.pop();
     float totalTemps=0;
@@ -401,19 +406,25 @@ void Station::dijkstra(int debut, int fin)
         {
             if(elem.getDebut()==anteDij&&elem.getFin()==reponse.top())
             {
+                Goto(150,cpt+8);
                 std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
                 std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
                 std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
                 std::cout<<" en utilisant "<<elem.TradType();
                 std::cout<<", vous mettrez " << affichageTemps(elem.getReelTemps())<<std::endl;
                 totalTemps+=elem.getReelTemps();
+                cpt++;
             }
         }
         anteDij=reponse.top();
         reponse.pop();
     }
+    Goto(150,10+cpt);
     std::cout<< " Pour une duree totale de "<<affichageTemps(totalTemps)<<std::endl;
-    std::cout<<"----------------------------"<<std::endl;
+    Goto(150,11+cpt);
+    std::cout<<"---------------------------------------------------------------------------------------------------"<<std::endl;
+    delay(20000);
+    system("cls");
 }
 bool Station::bfs(int debut, int fin)
 {
@@ -524,16 +535,27 @@ float Station::CalculTemps(Trajet traj)
 void Station::Critere()
 {
     system("cls");
+    Goto(150,5);
     std::cout<< "Mode actuellement selectionne: "<<m_mode<<std::endl;
+     Goto(150,7);
     std::cout<< "1. Tres bon skieur (pas de V et peut de B)"<<std::endl;
+      Goto(150,8);
     std::cout<< "2. Skieur Moyen (pas N)"<<std::endl;
+      Goto(150,9);
     std::cout<< "3. Sans dechausser (pas de TDH,TC,BUS)"<<std::endl;
+      Goto(150,10);
     std::cout<< "4. Peur du vide (Pas de TDS, TS)"<<std::endl;
-    std::cout<< "5. Professionel (R,N prioriter)"<<std::endl;
+      Goto(150,11);
+    std::cout<< "5. Professionel (R,N priorite)"<<std::endl;
+      Goto(150,12);
     std::cout<< "6. Visite (priorite piste N,R,B,V)"<<std::endl;
+      Goto(150,13);
     std::cout<< "7. Aucun"<<std::endl;
+      Goto(150,14);
     std::cout<< "Quel mode voulez-vous choisir?: "<<std::endl;
+      Goto(150,15);
     std::cout<< "/!\\ Pour acceder a certains endroits de la station, vous pourriez etre oblige d'emprunter certains chemins que vous souhaitez eviter /!\\ "<<std::endl;
+    Goto(185,14);
     int choix=0;
     do
     {
@@ -643,27 +665,38 @@ std::string Station::affichageTemps(float temps)
 }
 void Station::Trajet2point()
 {
+    system("cls");
     std::cout<<std::endl;
-    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+
+    int cpt=1;
     for(auto& elem:m_lieu)
     {
+        Goto(159,cpt+5);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+        cpt++;
     }
+    Goto(159,cpt+8);
+    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
     int debut=0;
     do
     {
         std::cin>>debut;
     }while(debut<0 || debut>m_nbLieu);
     system("cls");
-    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+    cpt=1;
+
     for(auto& elem:m_lieu)
     {
+        Goto(159,cpt+5);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+        cpt++;
     }
+    Goto(159,cpt+8);
+    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
     int fin=0;
     do
     {
@@ -675,8 +708,10 @@ void Station::Trajet2point()
     {
         elem.setTemps(CalculTemps(elem));
     }
+    cpt=1;
     if(bfs(debut,fin)==false)
     {
+        Goto(159,5+cpt);
         std::cout << "Impossible d'atteindre le point ";
         std::cout << m_lieu[fin-1].getLieu() << " depuis ";
         std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
@@ -758,28 +793,39 @@ void Station::SelectionTrajet()
 }
 void Station::FordFercuson()
 {
+    system("cls");
     std::cout<<std::endl;
+    Goto(150,5);
+    int cpt=1;
     std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
     for(auto& elem:m_lieu)
     {
+        Goto(150,6+cpt);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+    cpt++;
     }
     int debut=0;
+    Goto(190,5);
     do
     {
         std::cin>>debut;
     }while(debut<0 || debut>m_nbLieu);
     system("cls");
+    Goto(150,5);
+    cpt=1;
     std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
     for(auto& elem:m_lieu)
     {
+        Goto(150,cpt+6);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+        cpt++;
     }
     int fin=0;
+    Goto(190,5);
     do
     {
         std::cin>>fin;
@@ -872,17 +918,30 @@ void Station::FordFercuson()
             flowmin=flowmax;
         }
     }
+    Goto(150,5);
     std::cout<<"La capacite maximale du lieu ";
     std::cout<<m_lieu[debut-1].getLieu()<<" a ";
     std::cout<<m_lieu[debut-1].getAltitude()<<"m d'altitude"<<std::endl;
+    Goto(150,7);
     std::cout<<"Au lieu ";
     std::cout<<m_lieu[fin-1].getLieu()<<" a ";
     std::cout<<m_lieu[fin-1].getAltitude()<<"m d'altitude"<<std::endl;
+    Goto(150,9);
     std::cout<<"Est de "<<flowfinal<<" personne par heure."<<std::endl;
+    Goto(150,11);
+
     while(!resultPetit.empty())
     {
-        std::cout<<resultPetit.front()<<" <---";
+        std::cout<<resultPetit.front();
         resultPetit.pop();
+        if(!resultPetit.empty()){
+            std::cout <<" <---";
+        }
+
+
     }
-    std::cout << " avec un flow min de "<< flowmin<<std::endl;
+    Goto(150,13);
+    std::cout << "Avec un flow min de "<< flowmin<<std::endl;
+    delay(20000);
+    system("cls");
 }
