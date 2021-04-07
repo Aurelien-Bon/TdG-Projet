@@ -20,23 +20,23 @@ int main()
     bool quitter=false;
     do
     {
-         Gotom(166,4);
+         Gotom(90,4);
         std::cout<<"Menu"<<std::endl;
-        Gotom(160,6);
+        Gotom(80,6);
         std::cout << "1. Choisir un trajet"<<std::endl;
-          Gotom(160,7);
+          Gotom(80,7);
         std::cout << "2. Choisir un lieu"<<std::endl;
-          Gotom(160,8);
+          Gotom(80,8);
         std::cout << "3. Choix d'un chemin entre 2 lieu"<<std::endl;
-          Gotom(160,9);
+          Gotom(80,9);
         std::cout << "4. Critere de selection des chemins"<<std::endl;
-          Gotom(160,10);
+          Gotom(80,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
-          Gotom(160,11);
+          Gotom(80,11);
         std::cout << "6. Quitter"<<std::endl;
-          Gotom(160,12);
+          Gotom(80,12);
         std::cout << "Que voulez-vous faire?: ";
-         Gotom(160,13);
+         Gotom(80,13);
         int choix=0;
         do
         {
