@@ -11,7 +11,7 @@ void Gotom(int col, int nb)
 int main()
 {
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
-    system("mode con cols=1920 lines=1080");
+    system("mode con cols=200 lines=100");
     Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
