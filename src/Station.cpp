@@ -26,6 +26,20 @@ void delay(int delay_time){ // Créer un temps d'attente
 
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
 }
+void leave(){
+
+    delay(5000);
+    std::string saisie;
+    do{
+
+        system("cls");
+        Goto(150,5);
+        std::cout<<"Veuillez taper 'quitter' pour retourner au menu"<<std::endl;
+        Goto(220,5);
+        std::cin>>saisie;
+    }while(saisie!="quitter");
+    system("cls");
+}
 Station::Station(std::string filename)
 {
     m_filename=filename;
@@ -257,6 +271,7 @@ void Station::AffichagePoint()
     }
     delay(10000);
     system("cls");
+    leave();
 }
 void Station::AffichageTrajet()
 {
@@ -293,6 +308,7 @@ void Station::AffichageTrajet()
     std::cout<<", vous mettrez " << affichageTemps(m_trajet[choix-1].getReelTemps())<<std::endl;
     delay(5000);
     system("cls");
+    leave();
 }
 void Station::dijkstra(int debut, int fin)
 {
@@ -732,6 +748,7 @@ void Station::Trajet2point()
     {
         dijkstra(debut,fin);
     }
+    leave();
 }
 void Station::SelectionTrajet()
 {
@@ -944,4 +961,5 @@ void Station::FordFercuson()
     std::cout << "Avec un flow min de "<< flowmin<<std::endl;
     delay(20000);
     system("cls");
+    leave();
 }
