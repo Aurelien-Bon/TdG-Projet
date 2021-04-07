@@ -11,9 +11,9 @@ private:
     int m_A;
     int m_B;        // une arete dispose d'un point A et B départ -- > arrivée ainsi qu'un poids assigné à cette arete
     float m_temps;
-    float m_reelTemps;
+    float m_reelTemps;          // le temps correspond au temps avec les critères activés pour tromper l'algo, le temps réel correspond au véritable tmps pour un trajet
     bool m_selec;
-    int m_flow;
+    int m_flow;     // sert pour ford fulkerson
     int m_flowMax;
 public:
     Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b);
@@ -22,7 +22,7 @@ public:
     void setTemps(float temps);
     int getDebut();
     int getFin();
-    void afficher();
+    void afficher();                // principalement des getter et setter, excepté des traduction par exemple V--> piste verte
     std::string getType();
     std::string getNomTrajet();
     int getNbTrajet();

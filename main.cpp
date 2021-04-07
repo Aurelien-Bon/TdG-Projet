@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Station.h"
 #include "windows.h"
-void Gotom(int col, int nb)
+void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
 {
     COORD mycoord;
     mycoord.X = col;
@@ -15,28 +15,30 @@ int main()
     Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
-
-
+    HANDLE console;                                 //couleur console
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
+    //SetConsoleTextAttribute(console,1);
+    system("Color 30");
     bool quitter=false;
     do
     {
-         Gotom(170,4);
+        Gotom(20,4);
         std::cout<<"Menu"<<std::endl;
-        Gotom(160,6);
-        std::cout << "1. Choisir un trajet"<<std::endl;
-          Gotom(160,7);
+        Gotom(1,6);
+        std::cout << "1. Choisir un trajet"<<std::endl;         // switch proposant les différents choix à l'utilisateur
+        Gotom(1,7);
         std::cout << "2. Choisir un lieu"<<std::endl;
-          Gotom(160,8);
+        Gotom(1,8);
         std::cout << "3. Choix d'un chemin entre 2 lieu"<<std::endl;
-          Gotom(160,9);
+        Gotom(1,9);
         std::cout << "4. Critere de selection des chemins"<<std::endl;
-          Gotom(160,10);
+        Gotom(1,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
-          Gotom(160,11);
+        Gotom(1,11);
         std::cout << "6. Quitter"<<std::endl;
-          Gotom(160,12);
+        Gotom(1,12);
         std::cout << "Que voulez-vous faire?: ";
-         Gotom(183,12);
+         Gotom(25,12);
         int choix=0;
         do
         {
