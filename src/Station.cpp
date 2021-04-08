@@ -5,6 +5,7 @@
 #include <stack>
 #include "chrono"
 #include "thread"
+#include <windows.h>
 class myComparator///geeksforgeeks.org modifier par Aurélien Bon
 {
 public:
@@ -31,14 +32,42 @@ void leave(){   // fonction utilisée pour retourner au menu
 
     std::string saisie;
     do{
-
-
         std::cout<<"\n\n\n\n------------------------------------------------------------------------------"<<std::endl;
-        std::cout<<"Veuillez taper 'quitter' pour retourner au menu"<<std::endl;
-
+        std::cout <<"Saisir Q pour revenir au menu"<<std::endl;
         std::cin>>saisie;
-    }while(saisie!="quitter");
+        if(GetAsyncKeyState('Q'))
+        {
+            saisie="machin";
 
+        }
+
+    }while(saisie!="machin");
+
+
+
+}
+void CouleurCase(std::string type){
+    HANDLE console;                                 //couleur console
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
+    if(type=="V")
+      SetConsoleTextAttribute(console,10);
+    if(type=="R")
+        SetConsoleTextAttribute(console,12);
+    if(type=="B")
+        SetConsoleTextAttribute(console,9);
+    if(type=="N")
+        SetConsoleTextAttribute(console,15);
+    if(type=="SURF"||type=="BUS")
+        SetConsoleTextAttribute(console,13);
+    if(type=="TPH"||type=="TC"||type=="TSD"||type=="TS"||type=="TK")
+        SetConsoleTextAttribute(console,2);
+    if(type=="KL")
+        SetConsoleTextAttribute(console,3);
+}
+void CouleurReset(){
+    HANDLE console;                                 //couleur console
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(console,7);
 }
 Station::Station(std::string filename)
 {
@@ -245,12 +274,14 @@ void Station::AffichagePoint()
     {
         if(elem.getDebut()==choix)
         {
+            CouleurCase(elem.getType());
             Goto(1,cpt+6);
             std::cout << "Le trajet numero " << elem.getNbTrajet() << " vers ";
             std::cout << m_trajet[elem.getFin()-1].getNomTrajet()<<" en utilisant ";
             std::cout << elem.TradType()<<" pour une duree de ";
-            std::cout << affichageTemps(elem.getReelTemps()) << " minute"<<std::endl;
+            std::cout << affichageTemps(elem.getReelTemps())<<std::endl;
             cpt++;
+            CouleurReset();
         }
     }
     Goto(1,9+cpt);
@@ -261,11 +292,13 @@ void Station::AffichagePoint()
         if(elem.getFin()==choix){
 
             Goto(1,cpt+11);
+            CouleurCase(elem.getType());
             std::cout << "Le trajet numero " << elem.getNbTrajet() << " depuis ";
             std::cout << m_trajet[elem.getDebut()-1].getNomTrajet()<<" en utilisant ";
             std::cout << elem.TradType()<<" pour une duree de ";
             std::cout << affichageTemps(elem.getReelTemps())<<std::endl;
             cpt++;
+            CouleurReset();
         }
     }
 
@@ -275,12 +308,11 @@ void Station::AffichagePoint()
 void Station::AffichageTrajet()
 {
     int cpt=5;
-
     system("cls");          // on affiche chaque trajet existant dans le domaine skiable
-
     for(auto& elem:m_trajet)
     {
         Goto(4,cpt);
+        CouleurCase(elem.getType());
         std::cout << "Trajet n" << elem.getNbTrajet();
         Goto(40,cpt);
         std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
@@ -290,6 +322,7 @@ void Station::AffichageTrajet()
         std::cout <<"via "<< elem.TradType();
         Goto(150,cpt);
         std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+        CouleurReset();
         cpt++;
     }
     Goto(200,150);
@@ -300,13 +333,13 @@ void Station::AffichageTrajet()
     }while(choix<0 || choix>m_nbTrajet);
     system("cls");                                                          // on affiche toutes les infos relatives à ce trajet
     Goto(1,5);
+    CouleurCase(m_trajet[choix-1].getType());
     std::cout<<"Vous empruntez le trajet : "<<m_trajet[choix-1].getNomTrajet();
     std::cout<<" pour aller de "<< m_lieu[m_trajet[choix-1].getDebut()-1].getLieu();
     std::cout<<" vers "<<m_lieu[m_trajet[choix-1].getFin()-1].getLieu();
     std::cout<<" en utilisant "<<m_trajet[choix-1].TradType();
     std::cout<<", vous mettrez " << affichageTemps(m_trajet[choix-1].getReelTemps())<<std::endl;
-
-
+    CouleurReset();
     leave();
 }
 void Station::dijkstra(int debut, int fin)
@@ -422,12 +455,14 @@ void Station::dijkstra(int debut, int fin)
             if(elem.getDebut()==anteDij&&elem.getFin()==reponse.top())
             {
                 Goto(1,cpt+8);
+                CouleurCase(elem.getType());
                 std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
                 std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
                 std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
                 std::cout<<" en utilisant "<<elem.TradType();
                 std::cout<<", vous mettrez " << affichageTemps(elem.getReelTemps())<<std::endl;
                 totalTemps+=elem.getReelTemps();
+                CouleurReset();
                 cpt++;
             }
         }
@@ -565,7 +600,7 @@ void Station::Critere()
       Goto(1,12);
     std::cout<< "6. Visite  (priorite piste noir, rouge , bleu et verte"<<std::endl;
       Goto(1,13);
-    std::cout<< "7. Mode personnaliser (selectionner vos propres criteres)"<<std::endl;
+    std::cout<< "7. Mode personnalise (selectionner vos propres criteres)"<<std::endl;
       Goto(1,14);
     std::cout<< "8. Aucun"<<std::endl;
       Goto(1,15);
@@ -623,7 +658,7 @@ void Station::Critere()
         break;
     case 7:
         Personnaliser();
-        m_mode="Personnaliser";
+        m_mode="Personnalise";
         break;
     case 8:
         m_mode="Defaut";        // rien ne change
@@ -638,8 +673,9 @@ void Station::Personnaliser()
     int choix;
     do
     {
-        std::cout << "Mode personnaliser (selectionner vos propres criteres): "<<std::endl;
-        std::cout << "1. Piste Vert: ";
+        std::cout << "Mode personnalise (selectionner vos propres criteres): "<<std::endl;
+        CouleurCase("V");
+        std::cout << "1. Piste Verte: ";
         if(m_coef[0]==200)
         {
             std::cout<<" OFF "<<std::endl;
@@ -648,7 +684,8 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
-        std::cout << "2. Piste Bleu: ";
+        CouleurCase("B");
+        std::cout << "2. Piste Bleue: ";
         if(m_coef[1]==200)
         {
             std::cout<<" OFF "<<std::endl;
@@ -657,6 +694,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("R");
         std::cout << "3. Piste Rouge: ";
         if(m_coef[2]==200)
         {
@@ -666,7 +704,8 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
-        std::cout << "4. Piste Noir: ";
+        CouleurCase("N");
+        std::cout << "4. Piste Noire: ";
         if(m_coef[3]==200)
         {
             std::cout<<" OFF "<<std::endl;
@@ -675,6 +714,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("KL");
         std::cout << "5. Kilometre lance: ";
         if(m_coef[4]==200)
         {
@@ -684,7 +724,8 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
-        std::cout << "6. SnowPack: ";
+        CouleurCase("SURF");
+        std::cout << "6. SnowPark: ";
         if(m_coef[5]==200)
         {
             std::cout<<" OFF "<<std::endl;
@@ -693,6 +734,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("TPH");
         std::cout << "7. Telepherique: ";
         if(m_coef[6]==200)
         {
@@ -702,6 +744,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("TC");
         std::cout << "8. Telecabine: ";
         if(m_coef[7]==200)
         {
@@ -711,6 +754,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("TSD");
         std::cout << "9. Telesiege Debrayable: ";
         if(m_coef[8]==100)
         {
@@ -720,6 +764,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("TS");
         std::cout << "10. Telesiege: ";
         if(m_coef[9]==100)
         {
@@ -729,6 +774,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("TK");
         std::cout << "11. Teleski: ";
         if(m_coef[10]==200)
         {
@@ -738,6 +784,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurCase("BUS");
         std::cout << "12. Bus: ";
         if(m_coef[11]==200)
         {
@@ -747,6 +794,7 @@ void Station::Personnaliser()
         {
            std::cout<<" ON "<<std::endl;
         }
+        CouleurReset();
         std::cout << "13. quitter"<<std::endl;
         std::cout << "Que voulez vous modifier? "<<std::endl;
         do
@@ -980,14 +1028,7 @@ void Station::SelectionTrajet()
     }
 }
 
-void Couleur(Trajet traj){
 
-    if(traj.getType()=="V")
-    {
-
-    }
-
-}
 void Station::FordFercuson()
 {
     system("cls");
@@ -1150,9 +1191,10 @@ void Station::fermeturePiste()
     do
     {
         int cpt=5;
-        std::cout << "Parametrage d'ouverture et fermeture des piste: "<<std::endl;
+        std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
         for(auto& elem:m_trajet)
         {
+            CouleurCase(elem.getType());
             Goto(4,cpt);
             std::cout << "Trajet n" << elem.getNbTrajet();
             Goto(40,cpt);
@@ -1163,10 +1205,10 @@ void Station::fermeturePiste()
             std::cout <<"via "<< elem.TradType();
             Goto(150,cpt);
             std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
-            std::cout <<" est acctuellement: "<<elem.getFermeture()<<std::endl;;
+            std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;;
             cpt++;
         }
-        std::cout<<m_nbTrajet+1<<". Quitter"<<std::endl;
+        std::cout<<"\n"<<m_nbTrajet+1<<". Quitter"<<std::endl;
         Goto(200,150);
         std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
         do{

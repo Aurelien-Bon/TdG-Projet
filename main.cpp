@@ -15,10 +15,11 @@ int main()
     Station test("data_arcs.txt");
     //Station test("testprojet.txt");
     //test.Flotmin2pts();
-    HANDLE console;                                 //couleur console
-    console = GetStdHandle(STD_OUTPUT_HANDLE);
-    //SetConsoleTextAttribute(console,1);
-    system("Color 30");
+    //HANDLE console;                                 //couleur console
+    //console = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    //SetConsoleTextAttribute(console,31);
+   //system("Color 3F");
     bool quitter=false;
     do
     {
@@ -28,11 +29,15 @@ int main()
         Gotom(1,6);
         std::cout << "1. Choisir un trajet"<<std::endl;         // switch proposant les différents choix à l'utilisateur
         Gotom(1,7);
+
         std::cout << "2. Choisir un lieu"<<std::endl;
         Gotom(1,8);
+
         std::cout << "3. Choix d'un chemin entre 2 lieu"<<std::endl;
+
         Gotom(1,9);
         std::cout << "4. Critere de selection des chemins"<<std::endl;
+
         Gotom(1,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
         Gotom(1,11);
