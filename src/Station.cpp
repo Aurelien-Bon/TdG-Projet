@@ -32,13 +32,13 @@ void leave(){   // fonction utilisée pour retourner au menu
     std::string saisie;
     do{
 
-        system("cls");
-        Goto(1,5);
+
+        std::cout<<"\n\n\n\n------------------------------------------------------------------------------"<<std::endl;
         std::cout<<"Veuillez taper 'quitter' pour retourner au menu"<<std::endl;
-        Goto(50,5);
+
         std::cin>>saisie;
     }while(saisie!="quitter");
-    system("cls");
+
 }
 Station::Station(std::string filename)
 {
@@ -269,8 +269,8 @@ void Station::AffichagePoint()
             cpt++;
         }
     }
-    delay(10000);
-    system("cls");
+
+
     leave();
 }
 void Station::AffichageTrajet()
@@ -306,8 +306,8 @@ void Station::AffichageTrajet()
     std::cout<<" vers "<<m_lieu[m_trajet[choix-1].getFin()-1].getLieu();
     std::cout<<" en utilisant "<<m_trajet[choix-1].TradType();
     std::cout<<", vous mettrez " << affichageTemps(m_trajet[choix-1].getReelTemps())<<std::endl;
-    delay(5000);
-    system("cls");
+
+
     leave();
 }
 void Station::dijkstra(int debut, int fin)
@@ -439,8 +439,8 @@ void Station::dijkstra(int debut, int fin)
     std::cout<< " Pour une duree totale de "<<affichageTemps(totalTemps)<<std::endl;
     Goto(1,11+cpt);
     std::cout<<"---------------------------------------------------------------------------------------------------"<<std::endl;
-    delay(20000);
-    system("cls");
+
+
 }
 bool Station::bfs(int debut, int fin)
 {
@@ -969,7 +969,7 @@ void Station::FordFercuson()
     }
     Goto(1,13);
     std::cout << "Avec un flow min de "<< flowmin<<std::endl;
-    delay(20000);
-    system("cls");
+   // delay(20000);
+   // system("cls");
     leave();
 }

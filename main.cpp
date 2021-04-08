@@ -22,6 +22,7 @@ int main()
     bool quitter=false;
     do
     {
+        system("cls");
         Gotom(20,4);
         std::cout<<"Menu"<<std::endl;
         Gotom(1,6);
