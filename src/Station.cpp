@@ -6,6 +6,7 @@
 #include "chrono"
 #include "thread"
 #include <windows.h>
+#include<conio.h>
 class myComparator///geeksforgeeks.org modifier par Aurélien Bon
 {
 public:
@@ -27,23 +28,20 @@ void delay(int delay_time){ // Créer un temps d'attente
 
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
 }
-void leave(){   // fonction utilisée pour retourner au menu
+void leave()
+{   // fonction utilisée pour retourner au menu
 
-
-    std::string saisie;
-    do{
-        std::cout<<"\n\n\n\n------------------------------------------------------------------------------"<<std::endl;
-        std::cout <<"Saisir Q pour revenir au menu"<<std::endl;
-        std::cin>>saisie;
-        if(GetAsyncKeyState('Q'))
-        {
-            saisie="machin";
-
-        }
-
-    }while(saisie!="machin");
-
-
+    char key_press;
+    int ascii_value;
+    std::cout<<"\n\n\n\n------------------------------------------------------------------------------"<<std::endl;
+    std::cout <<"Appuyez sur ESC pour revenir au menu"<<std::endl;
+    while(1)///https://fahad-cprogramming.blogspot.com
+    {
+        key_press=getch();
+        ascii_value=key_press;
+        if(ascii_value==27) // For ESC
+            break;
+    }
 
 }
 void CouleurCase(std::string type){
@@ -1079,9 +1077,7 @@ void Station::FordFercuson()
     std::queue<int> resultat;
     int flowfinal=0;
     int flowmin=0;
-    int arretefinal;
     std::queue<float> resultPetit;
-    int arreteminimun=-1;
     while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
     {
         int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
