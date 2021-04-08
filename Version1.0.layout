@@ -2,43 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\Station.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1093" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="src\Station.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6232" topLine="0" />
+			<Cursor1 position="35271" topLine="158" />
 		</Cursor>
 		<Folding>
 			<Collapse line="18" />
 			<Collapse line="24" />
+			<Collapse line="28" />
 			<Collapse line="43" />
 			<Collapse line="82" />
-			<Collapse line="87" />
-			<Collapse line="154" />
-			<Collapse line="207" />
-			<Collapse line="445" />
-			<Collapse line="483" />
-			<Collapse line="551" />
-			<Collapse line="628" />
-			<Collapse line="754" />
+			<Collapse line="86" />
+			<Collapse line="153" />
+			<Collapse line="206" />
+			<Collapse line="219" />
+			<Collapse line="275" />
+			<Collapse line="312" />
+			<Collapse line="444" />
+			<Collapse line="482" />
+			<Collapse line="550" />
+			<Collapse line="588" />
+			<Collapse line="636" />
+			<Collapse line="752" />
+			<Collapse line="781" />
+			<Collapse line="817" />
+			<Collapse line="846" />
+			<Collapse line="917" />
+			<Collapse line="982" />
+			<Collapse line="1122" />
 		</Folding>
-	</File>
-	<File name="include\Trajet.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="929" topLine="0" />
-		</Cursor>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="762" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="include\Station.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1093" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="src\Trajet.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Trajet.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="929" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
