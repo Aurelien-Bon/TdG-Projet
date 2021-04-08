@@ -1035,6 +1035,8 @@ void Station::FordFercuson()
     std::cout<<std::endl;
     Goto(1,5);
     int cpt=1;
+    int arretefinal;
+    int arreteminimun=-1;
     std::cout << "De quel lieu voulez-vous partir?"<<std::endl;     // choix du départ de l'arrivée
     for(auto& elem:m_lieu)
     {
