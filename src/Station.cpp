@@ -28,7 +28,7 @@ void delay(int delay_time){ // Créer un temps d'attente
 }
 void leave(){   // fonction utilisée pour retourner au menu
 
-    delay(5000);
+
     std::string saisie;
     do{
 
@@ -808,6 +808,15 @@ void Station::SelectionTrajet()
             elem.setSelec(false);
         }
     }
+}
+
+void Couleur(Trajet traj){
+
+    if(traj.getType()=="V")
+    {
+
+    }
+
 }
 void Station::FordFercuson()
 {
