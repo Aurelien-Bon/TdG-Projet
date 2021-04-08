@@ -1077,7 +1077,9 @@ void Station::FordFercuson()
     std::queue<int> resultat;
     int flowfinal=0;
     int flowmin=0;
+    int arretefinal;
     std::queue<float> resultPetit;
+    int arreteminimun=-1;
     while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
     {
         int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
@@ -1097,7 +1099,6 @@ void Station::FordFercuson()
         int r1;
         std::queue<int> resul2; // on crée notre 2nde queue qui va nous servir
         r1=resultat.front();
-        resul2.push(r1);
         resultat.pop();
         int flowmax=9999;
         while(!resultat.empty())//on recupere l'arete avec le moins de flow
@@ -1109,28 +1110,20 @@ void Station::FordFercuson()
                     if(elem.getMaxFlow()-elem.getFlow()<flowmax)
                     {
                         flowmax=elem.getMaxFlow()-elem.getFlow();
+                        arreteminimun=elem.getNbTrajet();
                     }
+                    resul2.push(elem.getNbTrajet());
                 }
             }
             r1=resultat.front();
-            resul2.push(r1);
             resultat.pop();
         }
         int r2;
-        r2=resul2.front();
         std::queue<float>save;
-        save.push(r2);
-        resul2.pop();
         while(!resul2.empty())//on ajoute le flow a chaque arrete
         {
-            for(auto& elem:m_trajet)
-            {
-                if(elem.getFin()==r2&&elem.getDebut()==resul2.front()&&elem.getSelec())
-                {
-                    elem.setFlow(elem.getFlow()+flowmax);
-                }
-            }
             r2=resul2.front();
+            m_trajet[r2-1].setFlow(m_trajet[r2-1].getFlow()+flowmax);
             save.push(r2);
             resul2.pop();
         }
@@ -1144,15 +1137,7 @@ void Station::FordFercuson()
         }
         if(flowmin<flowmax)
         {
-            while(!resultPetit.empty())
-            {
-                resultPetit.pop();
-            }
-            while(!save.empty())
-            {
-                resultPetit.push(save.front());
-                save.pop();
-            }
+            arretefinal=arreteminimun;
             flowmin=flowmax;
         }
     }
@@ -1167,19 +1152,10 @@ void Station::FordFercuson()
     Goto(1,9);
     std::cout<<"Est de "<<flowfinal<<" personne(s) par heure."<<std::endl;
     Goto(1,11);
-
-    while(!resultPetit.empty())
-    {
-        std::cout<<resultPetit.front();
-        resultPetit.pop();
-        if(!resultPetit.empty()){
-            std::cout <<" <---";
-        }
-
-
-    }
-    Goto(1,13);
-    std::cout << "Avec un flow min de "<< flowmin<<std::endl;
+    std::cout<< "Le trajet comprenant le moins bon debit est: ";
+    std::cout<<m_trajet[arretefinal-1].getNomTrajet()<<" qui est ";
+    std::cout<<m_trajet[arretefinal-1].TradType()<<" qui a pour capaciter "<<std::endl;
+    std::cout<<flowmin<<" personne(s) par heure."<<std::endl;
    // delay(20000);
    // system("cls");
     leave();
