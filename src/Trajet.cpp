@@ -8,13 +8,14 @@ void Goto(int col)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
 
-Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b)
+Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b,std::string fermer)
 {
     m_nbTrajet = nbTrajet;
     m_nomTrajet = nomTrajet;
     m_type = type;
     m_A = a;
     m_B = b;
+    m_fermeture=fermer;
 }
 Trajet::~Trajet() {}
 float Trajet::getTemps()  // retourne le temps d'une arete
@@ -142,4 +143,12 @@ int Trajet::getFlow()
 int Trajet::getMaxFlow()
 {
     return m_flowMax;
+}
+std::string Trajet::getFermeture()
+{
+    return m_fermeture;
+}
+void Trajet::setFermeture(std::string fermer)
+{
+    m_fermeture=fermer;
 }

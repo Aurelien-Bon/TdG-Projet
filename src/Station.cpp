@@ -60,9 +60,9 @@ Station::Station(std::string filename)
     for(int i=0;i<m_nbTrajet;i++)
     {
         int nbTrajet,a , b;
-        std::string nomTrajet,typeTrajet;
-        ifs >>nbTrajet>>nomTrajet>>typeTrajet>> a >> b;
-        Trajet n(nbTrajet,nomTrajet,typeTrajet,a,b);    // on crée un trajet à partir des composantes lues dans le fichier
+        std::string nomTrajet,typeTrajet,ferme;
+        ifs >>nbTrajet>>nomTrajet>>typeTrajet>> a >> b >> ferme;
+        Trajet n(nbTrajet,nomTrajet,typeTrajet,a,b,ferme);    // on crée un trajet à partir des composantes lues dans le fichier
         n.setReelTemps(CalculTemps(n));     // on enregistre les temps de chaque trajet après les avoir calculer
         n.setMaxFlow(CalculFlow(n));        // on attribue une valeur max à notre flow pour pert
         m_trajet.push_back(n);
@@ -83,7 +83,6 @@ Station::~Station()
 {
 
 }
-
 float Station::CalculTempsCoef(Trajet traj)     // Fonction utilisée pour faire augmenter le faux temps lors de la sélection d'un critère pour l'utilisateur
 {
     float temps=0;
@@ -554,32 +553,37 @@ void Station::Critere()
     Goto(1,5);
     std::cout<< "Mode actuellement selectionne: "<<m_mode<<std::endl;
      Goto(1,7);
-    std::cout<< "1. Tres bon skieur (pas de V et peut de B)"<<std::endl;
+    std::cout<< "1. Tres bon skieur (pas de piste verte et un minimum de piste bleu)"<<std::endl;
       Goto(1,8);
-    std::cout<< "2. Skieur Moyen (pas N)"<<std::endl;
+    std::cout<< "2. Skieur Moyen (pas de piste noir)"<<std::endl;
       Goto(1,9);
-    std::cout<< "3. Sans dechausser (pas de TDH,TC,BUS)"<<std::endl;
+    std::cout<< "3. Sans dechausser (pas de telepherique, de telecabine ou de bus)"<<std::endl;
       Goto(1,10);
-    std::cout<< "4. Peur du vide (Pas de TDS, TS)"<<std::endl;
+    std::cout<< "4. Peur du vide (pas de telesiege)"<<std::endl;
       Goto(1,11);
-    std::cout<< "5. Professionel (R,N priorite)"<<std::endl;
+    std::cout<< "5. Professionel (piste noir et rouge en priorite)"<<std::endl;
       Goto(1,12);
-    std::cout<< "6. Visite (priorite piste N,R,B,V)"<<std::endl;
+    std::cout<< "6. Visite  (priorite piste noir, rouge , bleu et verte"<<std::endl;
       Goto(1,13);
-    std::cout<< "7. Aucun"<<std::endl;
+    std::cout<< "7. Mode personnaliser (selectionner vos propres criteres)"<<std::endl;
       Goto(1,14);
-    std::cout<< "Quel mode voulez-vous choisir?: "<<std::endl;
+    std::cout<< "8. Aucun"<<std::endl;
       Goto(1,15);
+    std::cout<< "Quel mode voulez-vous choisir?: "<<std::endl;
+      Goto(1,16);
     std::cout<< "/!\\ Pour acceder a certains endroits de la station, vous pourriez etre oblige d'emprunter certains chemins que vous souhaitez eviter /!\\ "<<std::endl;
-    Goto(33,14);
+    Goto(33,15);
     int choix=0;
     do
     {
         std::cin>>choix;
-    }while(choix<0 || choix>7);                                     // L'utilisateur choisit le critère qui lui correspond le plus
-    for(auto& elem:m_coef)//reste des coef
-    {
-        elem=1;
+    }while(choix<0 || choix>8);
+    if(choix!=7)
+    {// L'utilisateur choisit le critère qui lui correspond le plus
+        for(auto& elem:m_coef)//reste des coef
+        {
+            elem=1;
+        }
     }
     switch(choix)                                                           // on modif les valeurs de certains coeff, pour faire "bug" notre algorithme pour qu'il évitent de prendre certains trajets en fonction du type
     {
@@ -618,6 +622,10 @@ void Station::Critere()
         m_mode="Visite";
         break;
     case 7:
+        Personnaliser();
+        m_mode="Personnaliser";
+        break;
+    case 8:
         m_mode="Defaut";        // rien ne change
         system("cls");
         break;
@@ -625,17 +633,172 @@ void Station::Critere()
     system("cls");
     reecritureFicher();     // on réécrit dans le fichier les nouveaux critères avec retour au menu par la suite,
 }
+void Station::Personnaliser()
+{
+    int choix;
+    do
+    {
+        std::cout << "Mode personnaliser (selectionner vos propres criteres): "<<std::endl;
+        std::cout << "1. Piste Vert: ";
+        if(m_coef[0]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "2. Piste Bleu: ";
+        if(m_coef[1]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "3. Piste Rouge: ";
+        if(m_coef[2]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "4. Piste Noir: ";
+        if(m_coef[3]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "5. Kilometre lance: ";
+        if(m_coef[4]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "6. SnowPack: ";
+        if(m_coef[5]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "7. Telepherique: ";
+        if(m_coef[6]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "8. Telecabine: ";
+        if(m_coef[7]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "9. Telesiege Debrayable: ";
+        if(m_coef[8]==100)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "10. Telesiege: ";
+        if(m_coef[9]==100)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "11. Teleski: ";
+        if(m_coef[10]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "12. Bus: ";
+        if(m_coef[11]==200)
+        {
+            std::cout<<" OFF "<<std::endl;
+        }
+        else
+        {
+           std::cout<<" ON "<<std::endl;
+        }
+        std::cout << "13. quitter"<<std::endl;
+        std::cout << "Que voulez vous modifier? "<<std::endl;
+        do
+        {
+            std::cin>>choix;
+        }while(choix<0 || choix>13);
+        if(choix!=13&&choix!=9&&choix!=10)
+        {
+            if(m_coef[choix-1]==200)
+            {
+                m_coef[choix-1]=1;
+            }
+            else
+            {
+               m_coef[choix-1]=200;
+            }
+        }
+        if(choix==9||choix==10)
+        {
+            if(m_coef[choix-1]==100)
+            {
+                m_coef[choix-1]=1;
+            }
+            else
+            {
+               m_coef[choix-1]=100;
+            }
+        }
+        system("cls");
+    }while(choix!=13);
+}
 void Station::reecritureFicher()
 {
     std::vector<std::string> fichier;
+    std::string line;
+    std::string test;
     std::ifstream ifs{m_filename};  // ouverture du flux de lecture
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + m_filename );
-    for (int i=0; i<m_nbLieu+m_nbTrajet+2; ++i)     // on lit tout le fichier et on save tt dans un vec
+    for (int i=0; i<m_nbLieu+2; ++i)     // on lit tout le fichier et on save tt dans un vec
     {
-        std::string line;
         std::getline(ifs,line);
         fichier.push_back(line);
+    }
+    for (int i=0; i<m_nbTrajet; ++i)     // on lit tout le fichier et on save tt dans un vec
+    {
+        std::string nbTrajet,a,b;
+        std::string nomTrajet,typeTrajet,fermer;
+        ifs >>nbTrajet>>nomTrajet>>typeTrajet>> a >> b >>fermer;
+        test=nbTrajet+"\t"+nomTrajet+"\t"+typeTrajet+"\t"+a+"\t"+b+"\t"+m_trajet[i].getFermeture();
+        std::cout <<test<<std::endl;
+        fichier.push_back(test);
     }
     for(auto& elem:m_coef)      // on rajoute les nouveaux coeff dans notre vec
     {
@@ -808,6 +971,13 @@ void Station::SelectionTrajet()
             elem.setSelec(false);
         }
     }
+    for(auto& elem:m_trajet)
+    {
+        if(elem.getFermeture()=="Fermer")
+        {
+            elem.setSelec(false);
+        }
+    }
 }
 
 void Couleur(Trajet traj){
@@ -893,7 +1063,7 @@ void Station::FordFercuson()
         {
             for(auto& elem:m_trajet)
             {
-                if(elem.getFin()==r1&&elem.getDebut()==resultat.front())
+                if(elem.getFin()==r1&&elem.getDebut()==resultat.front()&&elem.getSelec())
                 {
                     if(elem.getMaxFlow()-elem.getFlow()<flowmax)
                     {
@@ -914,7 +1084,7 @@ void Station::FordFercuson()
         {
             for(auto& elem:m_trajet)
             {
-                if(elem.getFin()==r2&&elem.getDebut()==resul2.front())
+                if(elem.getFin()==r2&&elem.getDebut()==resul2.front()&&elem.getSelec())
                 {
                     elem.setFlow(elem.getFlow()+flowmax);
                 }
@@ -972,4 +1142,48 @@ void Station::FordFercuson()
    // delay(20000);
    // system("cls");
     leave();
+}
+void Station::fermeturePiste()
+{
+    int choix=0;
+    system("cls");
+    do
+    {
+        int cpt=5;
+        std::cout << "Parametrage d'ouverture et fermeture des piste: "<<std::endl;
+        for(auto& elem:m_trajet)
+        {
+            Goto(4,cpt);
+            std::cout << "Trajet n" << elem.getNbTrajet();
+            Goto(40,cpt);
+            std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+            Goto(70,cpt);
+            std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+            Goto(110,cpt);
+            std::cout <<"via "<< elem.TradType();
+            Goto(150,cpt);
+            std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+            std::cout <<" est acctuellement: "<<elem.getFermeture()<<std::endl;;
+            cpt++;
+        }
+        std::cout<<m_nbTrajet+1<<". Quitter"<<std::endl;
+        Goto(200,150);
+        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
+        do{
+            std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
+        }while(choix<0 || choix>m_nbTrajet+1);
+        system("cls");
+        if(choix!=m_nbTrajet+1)
+        {
+            if(m_trajet[choix-1].getFermeture()=="Fermer")
+            {
+                m_trajet[choix-1].setFermeture("Ouvert");
+            }
+            else
+            {
+                m_trajet[choix-1].setFermeture("Fermer");
+            }
+        }
+    }while(choix!=m_nbTrajet+1);
+    reecritureFicher();
 }

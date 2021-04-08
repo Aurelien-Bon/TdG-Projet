@@ -36,15 +36,17 @@ int main()
         Gotom(1,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
         Gotom(1,11);
-        std::cout << "6. Quitter"<<std::endl;
+        std::cout << "6. Modification des ouverture des piste"<<std::endl;
         Gotom(1,12);
+        std::cout << "7. Quitter"<<std::endl;
+        Gotom(1,13);
         std::cout << "Que voulez-vous faire?: ";
-         Gotom(25,12);
+         Gotom(25,13);
         int choix=0;
         do
         {
             std::cin>>choix;
-        }while(choix<0 || choix>6);
+        }while(choix<0 || choix>7);
         switch(choix)
         {
         case 1:
@@ -63,6 +65,9 @@ int main()
             test.FordFercuson();
             break;
         case 6:
+            test.fermeturePiste();
+            break;
+        case 7:
             quitter=true;
             system("cls");
             break;

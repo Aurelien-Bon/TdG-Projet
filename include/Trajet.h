@@ -15,8 +15,9 @@ private:
     bool m_selec;
     int m_flow;     // sert pour ford fulkerson
     int m_flowMax;
+    std::string m_fermeture;
 public:
-    Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b);
+    Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b, std::string fermer);
     ~Trajet();
     float getTemps();
     void setTemps(float temps);
@@ -35,6 +36,8 @@ public:
     void setMaxFlow(int flowMax);
     int getFlow();
     int getMaxFlow();
+    std::string getFermeture();
+    void setFermeture(std::string fermer);
 };
 
 

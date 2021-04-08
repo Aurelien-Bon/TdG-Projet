@@ -29,12 +29,13 @@ public:
     bool bfs(int debut,int fin);
     float CalculTemps(Trajet traj); // Permet de calculer le temps réel
     void Critere(); // permet l'utilisateur de personnaliser son xp sur l'appli
+    void Personnaliser();
     void reecritureFicher();    // réécrit les nouvelles infos dans le file
     std::string affichageTemps(float temps);    // une trad pour le temps
     void Trajet2point();       // chemin le plus court avec des lieux en prenant compte des critères
     void SelectionTrajet(); // Utilisation pour les extensions
     void FordFercuson();
-    //void Flotmin2pts();
+    void fermeturePiste();
 };
 
 
