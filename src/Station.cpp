@@ -1110,72 +1110,173 @@ std::string Station::affichageTemps(float temps)
 }
 void Station::Trajet2point()
 {
-    system("cls");
-    std::cout<<std::endl;
-
     int cpt=1;
-    for(auto& elem:m_lieu)  //  Pour chaque elem dans le vecteur, on affiche les elem correspondant à chaque lieu
-    {
-        Goto(1,cpt+5);
-        std::cout<<elem.getNbLieu()<<". Lieu: ";
-        std::cout<<elem.getLieu()<<" a ";
-        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
-        cpt++;
-    }
-    Goto(45,cpt+8);             // on propose un lieu de départ et un lieu d'arrivée à étudier
-    std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
-    int debut=0;
-    do
-    {
-        std::cin>>debut;
-    }while(debut<0 || debut>m_nbLieu);
     system("cls");
-    cpt=1;
-
-    for(auto& elem:m_lieu)
-    {
-        Goto(1,cpt+5);
-        std::cout<<elem.getNbLieu()<<". Lieu: ";
-        std::cout<<elem.getLieu()<<" a ";
-        std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
-        cpt++;
-    }
-    Goto(45,cpt+8);
-    std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
-    int fin=0;
+    Goto(1,5+cpt);
+    std::cout << "Que voulez vous faire ?"<<std::endl;
+    std::cout << "1. Plus court trajet en nombre d'etape."<<std::endl;
+    std::cout << "2. Plus court trajet en terme de temps."<<std::endl;
+    int choix;
     do
     {
-        std::cin>>fin;
-    }while(fin<0 || fin>m_nbLieu||fin==debut);
-    system("cls");                  // on fait à l'appel pour chercher le trajet à adopter
-    SelectionTrajet();
-    for(auto& elem:m_trajet)
+        std::cin>>choix;
+    }while(choix<0 || choix>2);     // en fonction des cas, l'utilisateur peut décider de prendre un trajet qui ne respecte pas forcément, autrement retour au menu
+    system("cls");
+    if(choix==1)
     {
-        elem.setTemps(CalculTemps(elem));
-    }
-    cpt=1;
-    if(bfs(debut,fin)==false)       // dans le cas ou ce n'est pas possible avec le critère, on propose deux choix
-    {
-        Goto(1,5+cpt);
-        std::cout << "Impossible d'atteindre le point ";
-        std::cout << m_lieu[fin-1].getLieu() << " depuis ";
-        std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
-        std::cout << "Que voulez vous faire ?"<<std::endl;
-        std::cout << "1. Y allez quand meme mais en respectant au maximum mes condition."<<std::endl;
-        std::cout << "2. Quitter."<<std::endl;
-        int choix;
+        cpt=1;
+        for(auto& elem:m_lieu)  //  Pour chaque elem dans le vecteur, on affiche les elem correspondant à chaque lieu
+        {
+            Goto(1,cpt+5);
+            std::cout<<elem.getNbLieu()<<". Lieu: ";
+            std::cout<<elem.getLieu()<<" a ";
+            std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+            cpt++;
+        }
+        Goto(45,cpt+8);             // on propose un lieu de départ et un lieu d'arrivée à étudier
+        std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+        int debut=0;
         do
         {
-            std::cin>>choix;
-        }while(choix<0 || choix>2);     // en fonction des cas, l'utilisateur peut décider de prendre un trajet qui ne respecte pas forcément, autrement retour au menu
-        if(choix==1)
+            std::cin>>debut;
+        }while(debut<0 || debut>m_nbLieu);
+        system("cls");
+        cpt=1;
+
+        for(auto& elem:m_lieu)
         {
-            dijkstra(debut,fin);
+            Goto(1,cpt+5);
+            std::cout<<elem.getNbLieu()<<". Lieu: ";
+            std::cout<<elem.getLieu()<<" a ";
+            std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+            cpt++;
+        }
+        Goto(45,cpt+8);
+        std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+        int fin=0;
+        do
+        {
+            std::cin>>fin;
+        }while(fin<0 || fin>m_nbLieu||fin==debut);
+        system("cls");                  // on fait à l'appel pour chercher le trajet à adopter
+        SelectionTrajet();
+        if(bfs(debut,fin)==false)       // dans le cas ou ce n'est pas possible avec le critère, on propose deux choix
+        {
+            Goto(1,5+cpt);
+            std::cout << "Impossible d'atteindre le point ";
+            std::cout << m_lieu[fin-1].getLieu() << " depuis ";
+            std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
+        }
+        else
+        {
+            std::cout << "Plus court trajet en nombre d'etape pour atteindre ";
+            std::cout << m_lieu[fin-1].getLieu() << " depuis ";
+            std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
+            std::queue<int> resultat;
+            int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
+            if(anteBfs!=(-1))//si le sommet a des predecesseurs
+            {
+                resultat.push(m_lieu[fin-1].getNbLieu());
+                while(true)
+                {
+                    if(anteBfs!=(-1))
+                    {
+                        resultat.push(m_lieu[anteBfs-1].getNbLieu());
+                        anteBfs= m_lieu[anteBfs-1].getVisite();//on recupere le predecesseur de chaque sommet
+                    }
+                    else break;
+                }
+            }
+            int r1;
+            r1=resultat.front();
+            resultat.pop();
+            float tempTotal=0;
+            while(!resultat.empty())//on recupere l'arete avec le moins de flow
+            {
+                for(auto& elem:m_trajet)
+                {
+                    if(elem.getFin()==r1&&elem.getDebut()==resultat.front()&&elem.getSelec())
+                    {
+                        std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
+                        std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
+                        std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
+                        std::cout<<" en utilisant "<<elem.TradType();
+                        std::cout<<", vous mettrez " << affichageTemps(elem.getReelTemps())<<std::endl;
+                        tempTotal+=elem.getReelTemps();
+                    }
+                }
+                r1=resultat.front();
+                resultat.pop();
+            }
+            std::cout << "Pour une durée total de "<<affichageTemps(tempTotal);
         }
     }
     else
     {
-        dijkstra(debut,fin);
+        cpt=1;
+        for(auto& elem:m_lieu)  //  Pour chaque elem dans le vecteur, on affiche les elem correspondant à chaque lieu
+        {
+            Goto(1,cpt+5);
+            std::cout<<elem.getNbLieu()<<". Lieu: ";
+            std::cout<<elem.getLieu()<<" a ";
+            std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+            cpt++;
+        }
+        Goto(45,cpt+8);             // on propose un lieu de départ et un lieu d'arrivée à étudier
+        std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+        int debut=0;
+        do
+        {
+            std::cin>>debut;
+        }while(debut<0 || debut>m_nbLieu);
+        system("cls");
+        cpt=1;
+
+        for(auto& elem:m_lieu)
+        {
+            Goto(1,cpt+5);
+            std::cout<<elem.getNbLieu()<<". Lieu: ";
+            std::cout<<elem.getLieu()<<" a ";
+            std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
+            cpt++;
+        }
+        Goto(45,cpt+8);
+        std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+        int fin=0;
+        do
+        {
+            std::cin>>fin;
+        }while(fin<0 || fin>m_nbLieu||fin==debut);
+        system("cls");                  // on fait à l'appel pour chercher le trajet à adopter
+        SelectionTrajet();
+        for(auto& elem:m_trajet)
+        {
+            elem.setTemps(CalculTemps(elem));
+        }
+        cpt=1;
+        if(bfs(debut,fin)==false)       // dans le cas ou ce n'est pas possible avec le critère, on propose deux choix
+        {
+            Goto(1,5+cpt);
+            std::cout << "Impossible d'atteindre le point ";
+            std::cout << m_lieu[fin-1].getLieu() << " depuis ";
+            std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
+            std::cout << "Que voulez vous faire ?"<<std::endl;
+            std::cout << "1. Y allez quand meme mais en respectant au maximum mes condition."<<std::endl;
+            std::cout << "2. Quitter."<<std::endl;
+            int choix;
+            do
+            {
+                std::cin>>choix;
+            }while(choix<0 || choix>2);     // en fonction des cas, l'utilisateur peut décider de prendre un trajet qui ne respecte pas forcément, autrement retour au menu
+            if(choix==1)
+            {
+                dijkstra(debut,fin);
+            }
+        }
+        else
+        {
+            dijkstra(debut,fin);
+        }
     }
     leave();
 }
@@ -1244,8 +1345,6 @@ void Station::SelectionTrajet()
         }
     }
 }
-
-
 void Station::FordFercuson()
 {
     system("cls");
@@ -1369,10 +1468,16 @@ void Station::FordFercuson()
     Goto(1,9);
     std::cout<<"Est de "<<flowfinal<<" personne(s) par heure."<<std::endl;
     Goto(1,11);
-    std::cout<< "Le trajet comprenant le moins bon debit est: ";
-    std::cout<<m_trajet[arretefinal-1].getNomTrajet()<<" qui est ";
-    std::cout<<m_trajet[arretefinal-1].TradType()<<" qui a pour capacite "<<std::endl;
-    std::cout<<flowmin<<" personne(s) par heure."<<std::endl;
+    std::cout<< "Les Trajet satueres sont: "<<std::endl;
+    for(auto& elem:m_trajet)
+    {
+        if(elem.getMaxFlow()==elem.getFlow())
+        {
+            std::cout<<elem.getNomTrajet()<<" qui est ";
+            std::cout<<elem.TradType()<<" qui a pour capacite de ";
+            std::cout<<elem.getFlow()<<" personne(s) par heure."<<std::endl;
+        }
+    }
    // delay(20000);
    // system("cls");
     leave();

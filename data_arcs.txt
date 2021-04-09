@@ -37,7 +37,7 @@
 36	arc1800	1715		
 37	37	2100		
 95
-1	aiguille-rouge	TPH	12	5	Ouvert
+1	aiguille-rouge	TPH	12	5	Fermer
 2	aiguille-rouge1	N	5	4	Ouvert
 3	aiguille-rouge2	N	4	3	Ouvert
 4	aiguille-rouge3	N	3	2	Ouvert
@@ -132,13 +132,13 @@
 93	villaroger1	B	8	2	Ouvert
 94	villaroger2	B	2	1	Ouvert
 95	vitesse	KL	12	6	Ouvert
-200
 1
 1
 1
 1
 1
-200
+1
+1
 1
 1
 1
