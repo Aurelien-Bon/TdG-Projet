@@ -133,15 +133,15 @@
 94	villaroger2	B	2	1	Ouvert
 95	vitesse	KL	12	6	Ouvert
 1
-50
 1
 1
 1
 1
 1
-200
 1
 1
 1
 1
-Personnaliser
+1
+1
+Defaut

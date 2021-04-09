@@ -515,12 +515,12 @@ void Station::AffichageTrajet()
         break;
     }
 
-    Goto(200,150);
+    Goto(1,cpt+3);
     CouleurReset();
     int choixe=0;
     if(!copie.empty())
     {
-        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
+        std::cout<<"\n\nVeuillez saisir un nombre correspondant au trajet qui vous interesse "<<std::endl;
 
         bool test=false;
         do{
@@ -1363,6 +1363,7 @@ void Station::FordFercuson()
    // delay(20000);
    // system("cls");
     leave();
+    CouleurReset();
 }
 void Station::fermeturePiste()
 {
@@ -1374,7 +1375,13 @@ void Station::fermeturePiste()
         std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
         for(auto& elem:m_trajet)
         {
-            CouleurCase(elem.getType());
+            if(elem.getFermeture()=="Ouvert"){
+                CouleurCase("V");
+            }
+            else{
+                CouleurCase("R");
+            }
+
             Goto(4,cpt);
             std::cout << "Trajet n" << elem.getNbTrajet();
             Goto(40,cpt);
@@ -1408,4 +1415,5 @@ void Station::fermeturePiste()
         }
     }while(choix!=m_nbTrajet+1);
     reecritureFicher();
+    CouleurReset();
 }
