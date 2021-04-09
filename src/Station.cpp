@@ -1487,11 +1487,14 @@ void Station::fermeturePiste()
 {
     int choix=0;
     system("cls");
+    std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
+    Admin administrator("id.txt");
+    if(administrator.getID()!=""){
     do
     {
         int cpt=5;
-        std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
-        for(auto& elem:m_trajet)
+
+             for(auto& elem:m_trajet)
         {
             if(elem.getFermeture()=="Ouvert"){
                 CouleurCase("V");
@@ -1531,7 +1534,10 @@ void Station::fermeturePiste()
                 m_trajet[choix-1].setFermeture("Fermer");
             }
         }
-    }while(choix!=m_nbTrajet+1);
+        }while(choix!=m_nbTrajet+1);
+    }
     reecritureFicher();
     CouleurReset();
-}
+    }
+
+

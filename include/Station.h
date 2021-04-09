@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
+#include "Admin.h"
 
 class Station
 {
