@@ -2,9 +2,15 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+<<<<<<< Updated upstream
 	<File name="src\Lieu.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
+=======
+	<File name="src\Station.cpp" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1195" topLine="16" />
+>>>>>>> Stashed changes
 		</Cursor>
 	</File>
 	<File name="src\Station.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -28,6 +34,7 @@
 			<Cursor1 position="1559" topLine="0" />
 		</Cursor>
 	</File>
+<<<<<<< Updated upstream
 	<File name="include\Trajet.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1176" topLine="0" />
@@ -36,16 +43,30 @@
 	<File name="include\Lieu.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
+=======
+	<File name="include\Trajet.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="929" topLine="0" />
+>>>>>>> Stashed changes
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="include\Station.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
+<<<<<<< Updated upstream
 			<Cursor1 position="2139" topLine="7" />
 		</Cursor>
 	</File>
 	<File name="include\Station.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="338" topLine="0" />
+=======
+			<Cursor1 position="1093" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2139" topLine="18" />
+>>>>>>> Stashed changes
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
