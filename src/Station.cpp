@@ -351,7 +351,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
 
@@ -374,7 +375,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -396,7 +398,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -419,7 +422,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -441,7 +445,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -463,7 +468,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -485,7 +491,8 @@ void Station::AffichageTrajet()
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
-                std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
                 copie.push_back(elem);
             }
@@ -508,7 +515,8 @@ void Station::AffichageTrajet()
             Goto(110,cpt);
             std::cout <<"via "<< elem.TradType();
             Goto(150,cpt);
-            std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
+            std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+            std::cout <<"\test actuellement: "<<elem.getFermeture()<<std::endl;
             copie.push_back(elem);
             cpt++;
         }
@@ -537,7 +545,8 @@ void Station::AffichageTrajet()
         std::cout<<" pour aller de "<< m_lieu[copie[choixe-1].getDebut()-1].getLieu();
         std::cout<<" vers "<<m_lieu[copie[choixe-1].getFin()-1].getLieu();
         std::cout<<" en utilisant "<<copie[choixe-1].TradType();
-        std::cout<<", vous mettrez " << affichageTemps(copie[choixe-1].getReelTemps())<<std::endl;
+        std::cout<<", vous mettrez " << affichageTemps(copie[choixe-1].getReelTemps());
+        std::cout <<" ce chemin est: "<<copie[choixe-1].getFermeture()<<std::endl;
         CouleurReset();
     }
     else
@@ -582,7 +591,7 @@ void Station::dijkstra(int debut, int fin)
         m_lieu[a.getNbLieu()-1].setColor(1);    // on le traite
         for(auto& elem:m_trajet)  // pour chaque element contenu dans la liste d'arete
         {
-            if(elem.getDebut()==a.getNbLieu())
+            if(elem.getDebut()==a.getNbLieu()&&elem.getFermeture()=="Ouvert")
             {
                 if(m_lieu[elem.getFin()-1].getColor()!=1)   // si le sommet récupéré a une couleur différent de 1 (noir)
                 {
@@ -627,57 +636,62 @@ void Station::dijkstra(int debut, int fin)
         }
         //std::cout<<std::endl;
     }while(!graphParcouru);
-
-    int anteDij = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
-    std::stack<int> reponse;
-    if(anteDij!=(-1))//si le sommet a des predecesseur
+    if(m_lieu[fin-1].getVisite()!=-1)
     {
-        reponse.push(m_lieu[fin-1].getNbLieu());
-        while(true)
+        int anteDij = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
+        std::stack<int> reponse;
+        if(anteDij!=(-1))//si le sommet a des predecesseur
         {
-            if(anteDij!=(-1))
+            reponse.push(m_lieu[fin-1].getNbLieu());
+            while(true)
             {
-                reponse.push(m_lieu[anteDij-1].getNbLieu());
-                anteDij= m_lieu[anteDij-1].getVisite();//on recupere le predecesseur de chaque sommet
-            }
-            else break;
-        }
-    }
-    system("cls");
-    int cpt=1;
-    Goto(1,cpt+5);
-    std::cout<<"-----------------------------------------------------------------------------------------------------"<<std::endl;      // Affichage du trajet les plus rapides
-    Goto(1,cpt+6);
-    std::cout<<"Voici l'itineraire le plus rapide de "<<m_lieu[debut-1].getLieu()<<" jusqu'a "<<m_lieu[fin-1].getLieu()<<" avec le mode "<<m_mode<<" actif:\n "<<std::endl;
-    anteDij=reponse.top();
-    reponse.pop();
-    float totalTemps=0;
-    while(!reponse.empty())
-    {
-        for(auto& elem:m_trajet)
-        {
-            if(elem.getDebut()==anteDij&&elem.getFin()==reponse.top())
-            {
-                Goto(1,cpt+8);
-                CouleurCase(elem.getType());
-                std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
-                std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
-                std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
-                std::cout<<" en utilisant "<<elem.TradType();
-                std::cout<<", vous mettrez " << affichageTemps(elem.getReelTemps())<<std::endl;
-                totalTemps+=elem.getReelTemps();
-                CouleurReset();
-                cpt++;
+                if(anteDij!=(-1))
+                {
+                    reponse.push(m_lieu[anteDij-1].getNbLieu());
+                    anteDij= m_lieu[anteDij-1].getVisite();//on recupere le predecesseur de chaque sommet
+                }
+                else break;
             }
         }
+        system("cls");
+        int cpt=1;
+        Goto(1,cpt+5);
+        std::cout<<"-----------------------------------------------------------------------------------------------------"<<std::endl;      // Affichage du trajet les plus rapides
+        Goto(1,cpt+6);
+        std::cout<<"Voici l'itineraire le plus rapide de "<<m_lieu[debut-1].getLieu()<<" jusqu'a "<<m_lieu[fin-1].getLieu()<<" avec le mode "<<m_mode<<" actif:\n "<<std::endl;
         anteDij=reponse.top();
         reponse.pop();
+        float totalTemps=0;
+        while(!reponse.empty())
+        {
+            for(auto& elem:m_trajet)
+            {
+                if(elem.getDebut()==anteDij&&elem.getFin()==reponse.top())
+                {
+                    Goto(1,cpt+8);
+                    CouleurCase(elem.getType());
+                    std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
+                    std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
+                    std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
+                    std::cout<<" en utilisant "<<elem.TradType();
+                    std::cout<<", vous mettrez " << affichageTemps(elem.getReelTemps())<<std::endl;
+                    totalTemps+=elem.getReelTemps();
+                    CouleurReset();
+                    cpt++;
+                }
+            }
+            anteDij=reponse.top();
+            reponse.pop();
+        }
+        Goto(1,10+cpt);
+        std::cout<< " Pour une duree totale de "<<affichageTemps(totalTemps)<<std::endl;
+        Goto(1,11+cpt);
+        std::cout<<"---------------------------------------------------------------------------------------------------"<<std::endl;
     }
-    Goto(1,10+cpt);
-    std::cout<< " Pour une duree totale de "<<affichageTemps(totalTemps)<<std::endl;
-    Goto(1,11+cpt);
-    std::cout<<"---------------------------------------------------------------------------------------------------"<<std::endl;
-
+    else
+    {
+        std::cout<<"Impossible d'atteindre "<<m_lieu[fin-1].getLieu()<<" depuis "<<m_lieu[debut-1].getLieu()<<", un des acces est fermer "<<std::endl;
+    }
 
 }
 bool Station::bfs(int debut, int fin)
@@ -1049,7 +1063,6 @@ void Station::reecritureFicher()
         std::string nomTrajet,typeTrajet,fermer;
         ifs >>nbTrajet>>nomTrajet>>typeTrajet>> a >> b >>fermer;
         test=nbTrajet+"\t"+nomTrajet+"\t"+typeTrajet+"\t"+a+"\t"+b+"\t"+m_trajet[i].getFermeture();
-        std::cout <<test<<std::endl;
         fichier.push_back(test);
     }
     for(auto& elem:m_coef)      // on rajoute les nouveaux coeff dans notre vec
@@ -1397,7 +1410,7 @@ void Station::fermeturePiste()
         }
         std::cout<<"\n"<<m_nbTrajet+1<<". Quitter"<<std::endl;
         Goto(200,150);
-        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
+        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse: ";
         do{
             std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
         }while(choix<0 || choix>m_nbTrajet+1);

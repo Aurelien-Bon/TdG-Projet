@@ -48,12 +48,12 @@
 9	belvedere2	B	19	31	Ouvert
 10	belvedere3	B	31	35	Ouvert
 11	bois-de-l'ours	TS	10	15	Ouvert
-12	bosses	TK	16	26	Fermer
+12	bosses	TK	16	26	Ouvert
 13	cachette	R	21	30	Ouvert
 14	cachette	TSD	30	21	Ouvert
 15	carreley	R	31	36	Ouvert
 16	carreley	TS	36	31	Ouvert
-17	cascade	B	10	8	Ouvert
+17	cascade	B	10	8	Fermer
 18	chantel	B	34	36	Ouvert
 19	chantel	TS	36	34	Ouvert
 20	clair-blanc	R	15	31	Ouvert
@@ -110,7 +110,7 @@
 71	replat	TS	1	2	Ouvert
 72	reservoir	R	4	6	Ouvert
 73	rhonaz	B	3	8	Ouvert
-74	saint-jacques	B	11	9	Fermer
+74	saint-jacques	B	11	9	Ouvert
 75	saint-jacques	TS	9	11	Ouvert
 76	snowpark	SURF	24	31	Ouvert
 77	soliet1	R	4	3	Ouvert
@@ -132,16 +132,16 @@
 93	villaroger1	B	8	2	Ouvert
 94	villaroger2	B	2	1	Ouvert
 95	vitesse	KL	12	6	Ouvert
+200
 1
 1
 1
 1
 1
+200
 1
 1
 1
 1
 1
-1
-1
-Defaut
+Personnalise
