@@ -333,36 +333,44 @@ void Station::AffichageTrajet()
         std::cin>>choix;
     }while(choix<1 ||choix >8);
     system("cls");
+    int n;
     switch(choix){
     case 1:
+        n =1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="V"){
                 Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
                 std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
                 cpt++;
                 copie.push_back(elem);
+
             }
         }
         break;
     case 2:
+        n = 1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="B"){
                 Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -373,15 +381,18 @@ void Station::AffichageTrajet()
         }
         break;
     case 3:
+        n = 1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="R"){
                  Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -392,15 +403,19 @@ void Station::AffichageTrajet()
         }
         break;
     case 4:
+        n =1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="N"){
                  Goto(4,cpt);
                 CouleurCase(elem.getType());
+
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -411,15 +426,18 @@ void Station::AffichageTrajet()
         }
         break;
     case 5:
+        n =1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="KL"){
                 Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -430,15 +448,18 @@ void Station::AffichageTrajet()
         }
         break;
     case 6:
+        n =1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="SURF"){
                  Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -449,15 +470,18 @@ void Station::AffichageTrajet()
         }
         break;
     case 7:
+        n =1;
         for(auto& elem:m_trajet){
             if(elem.getType()=="TPH"||elem.getType()=="TC"||elem.getType()=="TSD"||elem.getType()=="TS"||elem.getType()=="TK"){
                 Goto(4,cpt);
                 CouleurCase(elem.getType());
+                std::cout <<n<<". ";
+                n++;
                 std::cout << "Trajet n" << elem.getNbTrajet();
                 Goto(40,cpt);
-                std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
                 Goto(70,cpt);
-                std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
                 Goto(110,cpt);
                 std::cout <<"via "<< elem.TradType();
                 Goto(150,cpt);
@@ -469,21 +493,23 @@ void Station::AffichageTrajet()
         }
         break;
     case 8:
+        n =1;
         for(auto& elem:m_trajet)
         {
-
             Goto(4,cpt);
             CouleurCase(elem.getType());
+            std::cout <<n<<". ";
+            n++;
             std::cout << "Trajet n" << elem.getNbTrajet();
             Goto(40,cpt);
-            std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+            std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
             Goto(70,cpt);
-            std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+            std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
             Goto(110,cpt);
             std::cout <<"via "<< elem.TradType();
             Goto(150,cpt);
             std::cout <<"\tTemps "<< affichageTemps(elem.getReelTemps())<<std::endl;
-
+            copie.push_back(elem);
             cpt++;
         }
         break;
@@ -491,25 +517,33 @@ void Station::AffichageTrajet()
 
     Goto(200,150);
     CouleurReset();
-    std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
     int choixe=0;
-    bool test=false;
-    do{
-        std::cin>>choixe;                // l'utilisateur fait une saisie d'un trajet
-        for(auto& elem:m_trajet){
-            if(elem.getNbTrajet()==m_trajet[choixe-1].getNbTrajet())
-                test=true;
-        }
-    }while((choixe<0 || choixe>m_nbTrajet)&&!test);
-    system("cls");                                                          // on affiche toutes les infos relatives à ce trajet
-    Goto(1,5);
-    CouleurCase(m_trajet[choixe-1].getType());
-    std::cout<<"Vous empruntez le trajet : "<<m_trajet[choixe-1].getNomTrajet();
-    std::cout<<" pour aller de "<< m_lieu[m_trajet[choixe-1].getDebut()-1].getLieu();
-    std::cout<<" vers "<<m_lieu[m_trajet[choixe-1].getFin()-1].getLieu();
-    std::cout<<" en utilisant "<<m_trajet[choixe-1].TradType();
-    std::cout<<", vous mettrez " << affichageTemps(m_trajet[choixe-1].getReelTemps())<<std::endl;
-    CouleurReset();
+    if(!copie.empty())
+    {
+        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse"<<std::endl;
+
+        bool test=false;
+        do{
+            std::cin>>choixe;                // l'utilisateur fait une saisie d'un trajet
+            for(auto& elem:m_trajet){
+                if(elem.getNbTrajet()==copie[choixe-1].getNbTrajet())
+                    test=true;
+            }
+        }while((choixe<0 || choixe>m_nbTrajet)&&!test);
+        system("cls");                                                          // on affiche toutes les infos relatives à ce trajet
+        Goto(1,5);
+        CouleurCase(copie[choixe-1].getType());
+        std::cout<<"Vous empruntez le trajet : "<<copie[choixe-1].getNomTrajet();
+        std::cout<<" pour aller de "<< m_lieu[copie[choixe-1].getDebut()-1].getLieu();
+        std::cout<<" vers "<<m_lieu[copie[choixe-1].getFin()-1].getLieu();
+        std::cout<<" en utilisant "<<copie[choixe-1].TradType();
+        std::cout<<", vous mettrez " << affichageTemps(copie[choixe-1].getReelTemps())<<std::endl;
+        CouleurReset();
+    }
+    else
+    {
+        std::cout << "Il n'y en a pas"<<std::endl;
+    }
     leave();
 }
 void Station::dijkstra(int debut, int fin)
