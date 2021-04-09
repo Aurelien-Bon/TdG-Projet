@@ -1488,8 +1488,6 @@ void Station::fermeturePiste()
     int choix=0;
     system("cls");
     std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
-    Admin administrator("id.txt");
-    if(administrator.getID()!=""){
     do
     {
         int cpt=5;
@@ -1535,9 +1533,8 @@ void Station::fermeturePiste()
             }
         }
         }while(choix!=m_nbTrajet+1);
-    }
-    reecritureFicher();
-    CouleurReset();
+        reecritureFicher();
+        CouleurReset();
     }
 
 

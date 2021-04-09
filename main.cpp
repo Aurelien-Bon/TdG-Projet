@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Station.h"
 #include "windows.h"
+#include "Admin.h"
 void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
 {
     COORD mycoord;
@@ -10,6 +11,7 @@ void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
 }
 int main()
 {
+    Admin administrateur("id.txt");
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
     system("mode con cols=200 lines=100");
     Station test("data_arcs.txt");
@@ -41,17 +43,29 @@ int main()
         Gotom(1,10);
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
         Gotom(1,11);
-        std::cout << "6. Modification des ouverture des piste"<<std::endl;
+        if(administrateur.getConnect()==false)
+            std::cout << "6. Connection administrateur"<<std::endl;
+        else
+            std::cout << "6. Gestion fermeture des piste"<<std::endl;
         Gotom(1,12);
-        std::cout << "7. Quitter"<<std::endl;
+        if(administrateur.getConnect()==false)
+            std::cout << "7. Quitter"<<std::endl;
+        else
+            std::cout << "7. Deconnection"<<std::endl;
         Gotom(1,13);
+        if(administrateur.getConnect()==true)
+            std::cout << "8. Quitter"<<std::endl;
+        Gotom(1,14);
         std::cout << "Que voulez-vous faire?: ";
-         Gotom(25,13);
+        Gotom(25,14);
         int choix=0;
+        int maxchoix=7;
+        if(administrateur.getConnect()==true)
+            maxchoix=8;
         do
         {
             std::cin>>choix;
-        }while(choix<0 || choix>7);
+        }while(choix<0 || choix>maxchoix);
         switch(choix)
         {
         case 1:
@@ -70,7 +84,10 @@ int main()
             test.FordFercuson();
             break;
         case 6:
-            test.fermeturePiste();
+            if(administrateur.getConnect()==false)
+                administrateur.Connection();
+            else
+                test.fermeturePiste();
             break;
         case 7:
             quitter=true;
