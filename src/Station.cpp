@@ -1358,7 +1358,7 @@ void Station::FordFercuson()
     Goto(1,11);
     std::cout<< "Le trajet comprenant le moins bon debit est: ";
     std::cout<<m_trajet[arretefinal-1].getNomTrajet()<<" qui est ";
-    std::cout<<m_trajet[arretefinal-1].TradType()<<" qui a pour capaciter "<<std::endl;
+    std::cout<<m_trajet[arretefinal-1].TradType()<<" qui a pour capacite "<<std::endl;
     std::cout<<flowmin<<" personne(s) par heure."<<std::endl;
    // delay(20000);
    // system("cls");
