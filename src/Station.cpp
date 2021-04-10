@@ -77,10 +77,11 @@ Station::Station(std::string filename)
     for (int i=0; i<m_nbLieu; ++i)
     {
         float nbLieu;
-        std::string nomLieu;
+        std::string nomLieu, fermer;
         int altitude;
-        ifs >> nbLieu >> nomLieu >> altitude;
+        ifs >> nbLieu >> nomLieu >> altitude >> fermer;
         Lieu n(nomLieu,nbLieu,altitude);   // on crée le lieu qu 'on push dans notre vec apres la lecture de la ligne
+        n.setFermeture(fermer);
         m_lieu.push_back(n);
     }
     ifs >> m_nbTrajet;    // on associe la taille par rapport aux données
@@ -1074,12 +1075,22 @@ void Station::reecritureFicher()
     std::ifstream ifs{m_filename};  // ouverture du flux de lecture
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + m_filename );
-    for (int i=0; i<m_nbLieu+2; ++i)     // on lit tout le fichier et on save tt dans un vec
+
+    // on lit tout le fichier et on save tt dans un vec
+    ifs >> line;
+    fichier.push_back(line);
+    for(int i=0; i<m_nbLieu; ++i)
     {
-        std::getline(ifs,line);
+        std::string nbLieu;
+        std::string nomLieu, fermer;
+        std::string altitude;
+        ifs >> nbLieu >> nomLieu >> altitude >> fermer;
+        line=nbLieu+"\t"+nomLieu+"\t"+altitude+"\t"+m_lieu[i].getFermeture();
         fichier.push_back(line);
     }
-    for (int i=0; i<m_nbTrajet; ++i)     // on lit tout le fichier et on save tt dans un vec
+    ifs >> line;
+    fichier.push_back(line);
+    for(int i=0; i<m_nbTrajet; ++i)     // on lit tout le fichier et on save tt dans un vec
     {
         std::string nbTrajet,a,b;
         std::string nomTrajet,typeTrajet,fermer;
@@ -1588,14 +1599,165 @@ void Station::FordFercuson()
 }
 void Station::fermeturePiste()
 {
-    int choix=0;
+    int nb;
     system("cls");
-    std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
-    do
+    std::cout << "1. Parametrage lieu"<<std::endl;
+    std::cout << "2. Parametrage trajet"<<std::endl;
+    do{
+        std::cin>>nb;                // l'utilisateur fait une saisie d'un trajet
+    }while(nb<0 || nb>2);
+    if(nb==1)
+    {
+        system("cls");
+        int choix=0;
+        std::cout << "Parametrage d'ouverture et fermeture des lieu: "<<std::endl;
+        do
+        {
+            int cpt=5;
+
+            for(auto& elem:m_lieu)
+            {
+                if(elem.getFermeture()=="Ouvert"){      // on affiche tous les trajets et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
+                    CouleurCase("V");
+                }
+                else{
+                    CouleurCase("R");
+                }
+
+                Goto(4,cpt);
+                std::cout << "Lieu n" << elem.getNbLieu();
+                Goto(40,cpt);
+                std::cout << "nom: "<< elem.getLieu();
+                Goto(70,cpt);
+                std::cout <<" altitude: "<<elem.getAltitude();
+                Goto(150,cpt);
+                std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
+                cpt++;
+            }
+            std::cout<<"\n"<<m_nbLieu+1<<". Quitter"<<std::endl;
+            Goto(200,150);
+            std::cout<<"\n\nVeuillez saisir le lieu qui vous interesse: ";
+            do{
+                std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
+            }while(choix<0 || choix>m_nbLieu+1);
+            system("cls");
+            if(choix!=m_nbLieu+1)
+            {
+                if(m_lieu[choix-1].getFermeture()=="Fermer")
+                {
+                    m_lieu[choix-1].setFermeture("Ouvert");
+                    for(auto& elem:m_trajet)
+                    {
+                        if(elem.getDebut()==choix||elem.getFin()==choix)
+                        {
+                            elem.setFermeture("Ouvert");
+                        }
+                    }
+                }
+                else
+                {
+                    m_lieu[choix-1].setFermeture("Fermer");
+                    for(auto& elem:m_trajet)
+                    {
+                        if(elem.getDebut()==choix||elem.getFin()==choix)
+                        {
+                            elem.setFermeture("Fermer");
+                        }
+                    }
+                }
+            }
+        }while(choix!=m_nbLieu+1);
+    }
+    else
+    {
+        int choix=0;
+        system("cls");
+        std::cout << "Parametrage d'ouverture et fermeture des pistes: "<<std::endl;
+        do
+        {
+            int cpt=5;
+            for(auto& elem:m_trajet)
+            {
+                if(elem.getFermeture()=="Ouvert"){      // on affiche tous les trajets et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
+                    CouleurCase("V");
+                }
+                else{
+                    CouleurCase("R");
+                }
+
+                Goto(4,cpt);
+                std::cout << "Trajet n" << elem.getNbTrajet();
+                Goto(40,cpt);
+                std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
+                Goto(70,cpt);
+                std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
+                Goto(110,cpt);
+                std::cout <<"via "<< elem.TradType();
+                Goto(150,cpt);
+                std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
+                std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
+                cpt++;
+            }
+            std::cout<<"\n"<<m_nbTrajet+1<<". Quitter"<<std::endl;
+            Goto(200,150);
+            std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse: ";
+            do{
+                std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
+            }while(choix<0 || choix>m_nbTrajet+1);
+            system("cls");
+            if(choix!=m_nbTrajet+1)
+            {
+                if(m_trajet[choix-1].getFermeture()=="Fermer")
+                {
+                    m_trajet[choix-1].setFermeture("Ouvert");
+                }
+                else
+                {
+                    m_trajet[choix-1].setFermeture("Fermer");
+                }
+            }
+        }while(choix!=m_nbTrajet+1);
+    }
+    reecritureFicher();
+    CouleurReset();
+
+}
+void Station::InfoPiste()
+{
+    int nb;
+    system("cls");
+    std::cout << "1. Info ouverture lieu"<<std::endl;
+    std::cout << "2. Info ouverture trajet"<<std::endl;
+    do{
+        std::cin>>nb;                // l'utilisateur fait une saisie d'un trajet
+    }while(nb<0 || nb>2);
+    if(nb==1)
     {
         int cpt=5;
+        for(auto& elem:m_lieu)
+        {
+            if(elem.getFermeture()=="Ouvert"){      // on affiche tous les trajets et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
+                CouleurCase("V");
+            }
+            else{
+                CouleurCase("R");
+            }
 
-             for(auto& elem:m_trajet)
+            Goto(4,cpt);
+            std::cout << "Lieu n" << elem.getNbLieu();
+            Goto(40,cpt);
+            std::cout << "nom: "<< elem.getLieu();
+            Goto(70,cpt);
+            std::cout <<" altitude: "<<elem.getAltitude();
+            Goto(150,cpt);
+            std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
+            cpt++;
+        }
+    }
+    else
+    {
+        int cpt=5;
+        for(auto& elem:m_trajet)
         {
             if(elem.getFermeture()=="Ouvert"){      // on affiche tous les trajets et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
                 CouleurCase("V");
@@ -1607,37 +1769,18 @@ void Station::fermeturePiste()
             Goto(4,cpt);
             std::cout << "Trajet n" << elem.getNbTrajet();
             Goto(40,cpt);
-            std::cout << "Depart: "<< m_trajet[elem.getDebut()-1].getNomTrajet();
+            std::cout << "Depart: "<< m_lieu[elem.getDebut()-1].getLieu();
             Goto(70,cpt);
-            std::cout <<"Arrivee "<<m_trajet[elem.getFin()-1].getNomTrajet();
+            std::cout <<"Arrivee "<<m_lieu[elem.getFin()-1].getLieu();
             Goto(110,cpt);
             std::cout <<"via "<< elem.TradType();
             Goto(150,cpt);
             std::cout <<"Temps "<< affichageTemps(elem.getReelTemps());
-            std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;;
+            std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
             cpt++;
         }
-        std::cout<<"\n"<<m_nbTrajet+1<<". Quitter"<<std::endl;
-        Goto(200,150);
-        std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse: ";
-        do{
-            std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
-        }while(choix<0 || choix>m_nbTrajet+1);
-        system("cls");
-        if(choix!=m_nbTrajet+1)
-        {
-            if(m_trajet[choix-1].getFermeture()=="Fermer")
-            {
-                m_trajet[choix-1].setFermeture("Ouvert");
-            }
-            else
-            {
-                m_trajet[choix-1].setFermeture("Fermer");
-            }
-        }
-        }while(choix!=m_nbTrajet+1);
-        reecritureFicher();
-        CouleurReset();
     }
-
+    CouleurReset();
+    leave();
+}
 

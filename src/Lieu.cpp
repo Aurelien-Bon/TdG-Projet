@@ -50,3 +50,11 @@ return m_temps;
 void Lieu::setTemps(float temps){
     m_temps=temps;
 }
+void Lieu::setFermeture(std::string ferme)
+{
+    m_fermer=ferme;
+}
+std::string Lieu::getFermeture()
+{
+    return m_fermer;
+}

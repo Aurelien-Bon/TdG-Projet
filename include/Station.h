@@ -37,6 +37,7 @@ public:
     void SelectionTrajet(); // Utilisation pour les extensions
     void FordFercuson();
     void fermeturePiste();
+    void InfoPiste();
 };
 
 

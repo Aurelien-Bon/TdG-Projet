@@ -10,6 +10,7 @@ private:        // chaque sommet dispose d'un numéro, d'une couleur, visite corr
     int m_color;
     int m_visite;
     float m_temps;
+    std::string m_fermer;
 public:
     Lieu(std::string nom,float nbLieu,int altitude);
     ~Lieu();
@@ -24,6 +25,8 @@ public:
     int getColor();
     int getVisite();
     float getTemps();
+    void setFermeture(std::string fermer);
+    std::string getFermeture();
 };
 
 

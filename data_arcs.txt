@@ -1,41 +1,41 @@
 37
-1	villaroger	1200		
-2	2	1425		
-3	3	2135		
-4	4	2458		
-5	aiguille-rouge	3226		
-6	6	2158		
-7	arc2000	2120		
-8	pre-saint-esprit	1822		
-9	9	2120		
-10	10	2015		
-11	11	2195		
-12	12	2670		
-13	grand-col	2835		
-14	14	2446		
-15	arpette	2418		
-16	16	2296		
-17	17	2375		
-18	18	2314		
-19	deux-tetes	2285		
-20	20	2063		
-21	21	2160		
-22	22	2230		
-23	col-des-frettes	2384		
-24	24	2280		
-25	25	2294		
-26	col-de-la-chal	2600		
-27	27	2275		
-28	28	1750		
-29	29	1850		
-30	arc1600	1613		
-31	31	2050		
-32	col-du-grand-renard	2454		
-33	33	2150		
-34	34	1920		
-35	35	1830		
-36	arc1800	1715		
-37	37	2100		
+1	villaroger	1200	Ouvert
+2	2	1425	Ouvert
+3	3	2135	Ouvert
+4	4	2458	Ouvert
+5	aiguille-rouge	3226	Ouvert
+6	6	2158	Ouvert
+7	arc2000	2120	Ouvert
+8	pre-saint-esprit	1822	Ouvert
+9	9	2120	Ouvert
+10	10	2015	Ouvert
+11	11	2195	Ouvert
+12	12	2670	Ouvert
+13	grand-col	2835	Ouvert
+14	14	2446	Ouvert
+15	arpette	2418	Ouvert
+16	16	2296	Ouvert
+17	17	2375	Ouvert
+18	18	2314	Ouvert
+19	deux-tetes	2285	Ouvert
+20	20	2063	Ouvert
+21	21	2160	Ouvert
+22	22	2230	Ouvert
+23	col-des-frettes	2384	Ouvert
+24	24	2280	Ouvert
+25	25	2294	Ouvert
+26	col-de-la-chal	2600	Ouvert
+27	27	2275	Ouvert
+28	28	1750	Ouvert
+29	29	1850	Ouvert
+30	arc1600	1613	Ouvert
+31	31	2050	Ouvert
+32	col-du-grand-renard	2454	Ouvert
+33	33	2150	Ouvert
+34	34	1920	Ouvert
+35	35	1830	Ouvert
+36	arc1800	1715	Ouvert
+37	37	2100	Ouvert
 95
 1	aiguille-rouge	TPH	12	5	Ouvert
 2	aiguille-rouge1	N	5	4	Ouvert
@@ -53,7 +53,7 @@
 14	cachette	TSD	30	21	Ouvert
 15	carreley	R	31	36	Ouvert
 16	carreley	TS	36	31	Ouvert
-17	cascade	B	10	8	Fermer
+17	cascade	B	10	8	Ouvert
 18	chantel	B	34	36	Ouvert
 19	chantel	TS	36	34	Ouvert
 20	clair-blanc	R	15	31	Ouvert

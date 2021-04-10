@@ -21,13 +21,13 @@ int main()
         system("cls");
         Gotom(0,3);
         std::cout<<"*****************************************";
-        for(int i=3;i<16;i++){
+        for(int i=3;i<17;i++){
             Gotom(0,i);
             std::cout<<"*";
             Gotom(40,i);
             std::cout<<"*";
         }
-        Gotom(0,16);
+        Gotom(0,17);
         std::cout<<"*****************************************";
         Gotom(20,4);
         std::cout<<"Menu"<<std::endl;
@@ -47,39 +47,41 @@ int main()
         Gotom(4,10);
         std::cout << "5. Flow maximum entre 2 points"<<std::endl;
         Gotom(4,11);
-        if(administrateur.getConnect()==false)
-            std::cout << "6. Connexion administrateur"<<std::endl;
-        else
-            std::cout << "6. Gestion fermeture des pistes"<<std::endl;
+        std::cout << "6. Information des piste"<<std::endl;
         Gotom(4,12);
         if(administrateur.getConnect()==false)
-            std::cout << "7. Quitter"<<std::endl;
+            std::cout << "7. Connexion administrateur"<<std::endl;
         else
-            std::cout << "7. Ajouter un compte administrateur"<<std::endl;
-        if(administrateur.getConnect()==true)
-        {
-            Gotom(4,13);
-            std::cout << "8. Deconnexion"<<std::endl;
-        }
+            std::cout << "7. Gestion fermeture des pistes"<<std::endl;
+        Gotom(4,13);
+        if(administrateur.getConnect()==false)
+            std::cout << "8. Quitter"<<std::endl;
+        else
+            std::cout << "8. Ajouter un compte administrateur"<<std::endl;
         if(administrateur.getConnect()==true)
         {
             Gotom(4,14);
-            std::cout << "9. Quitter"<<std::endl;
+            std::cout << "9. Deconnexion"<<std::endl;
+        }
+        if(administrateur.getConnect()==true)
+        {
+            Gotom(4,15);
+            std::cout << "10. Quitter"<<std::endl;
         }
 
         if(administrateur.getConnect()==false)
-            Gotom(4,13);
+            Gotom(4,14);
         else
-            Gotom(1,15);
+            Gotom(1,16);
         std::cout << "Que voulez-vous faire?: ";
         if(administrateur.getConnect()==false)
-            Gotom(28,13);
+            Gotom(28,14);
         else
-            Gotom(25,15);
+            Gotom(25,16);
         int choix=0;
-        int maxchoix=7;
+        int maxchoix=8;
         if(administrateur.getConnect()==true)
-            maxchoix=9;
+            maxchoix=10;
         do
         {
             std::cin>>choix;
@@ -102,21 +104,27 @@ int main()
             test.FordFercuson();
             break;
         case 6:
+            test.InfoPiste();
+            break;
+        case 7:
             if(administrateur.getConnect()==false)
                 administrateur.Connexion();
             else
                 test.fermeturePiste();
             break;
-        case 7:
+        case 8:
             if(administrateur.getConnect()==false)
-                quitter=true;
+            {
+               quitter=true;
+                system("cls");
+            }
             else
                 administrateur.CreerCompte();
             break;
-        case 8:
+        case 9:
             administrateur.Deconnexion();
             break;
-        case 9:
+        case 10:
             quitter=true;
             system("cls");
             break;

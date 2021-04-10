@@ -2,38 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="src\Admin.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="502" topLine="0" />
+			<Cursor1 position="2859" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="include\Station.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1675" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="src\Lieu.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1058" topLine="23" />
+		</Cursor>
+	</File>
+	<File name="include\Lieu.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="781" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Station.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="29105" topLine="11" />
+			<Cursor1 position="36111" topLine="327" />
 		</Cursor>
 		<Folding>
 			<Collapse line="10" />
 			<Collapse line="20" />
 			<Collapse line="26" />
+			<Collapse line="31" />
 			<Collapse line="46" />
 			<Collapse line="64" />
 			<Collapse line="70" />
-			<Collapse line="113" />
-			<Collapse line="180" />
-			<Collapse line="233" />
-			<Collapse line="246" />
-			<Collapse line="316" />
-			<Collapse line="580" />
-			<Collapse line="719" />
-			<Collapse line="757" />
-			<Collapse line="825" />
-			<Collapse line="911" />
-			<Collapse line="1069" />
-			<Collapse line="1104" />
-			<Collapse line="1133" />
-			<Collapse line="1365" />
-			<Collapse line="1430" />
-			<Collapse line="1589" />
+			<Collapse line="110" />
+			<Collapse line="114" />
+			<Collapse line="181" />
+			<Collapse line="234" />
+			<Collapse line="247" />
+			<Collapse line="581" />
+			<Collapse line="720" />
+			<Collapse line="758" />
+			<Collapse line="826" />
+			<Collapse line="912" />
+			<Collapse line="1115" />
+			<Collapse line="1144" />
+			<Collapse line="1376" />
+			<Collapse line="1441" />
+			<Collapse line="1600" />
+			<Collapse line="1725" />
 		</Folding>
 	</File>
 	<File name="include\Admin.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -41,19 +57,9 @@
 			<Cursor1 position="221" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Lieu.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Admin.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2859" topLine="71" />
-		</Cursor>
-	</File>
-	<File name="include\Station.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1245" topLine="0" />
+			<Cursor1 position="3581" topLine="81" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
