@@ -106,7 +106,7 @@
 	"Lieu.h"
 	<iostream>
 
-1618047862 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\github\tdg-projet\src\station.cpp
+1618058014 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\github\tdg-projet\src\station.cpp
 	"Station.h"
 	<fstream>
 	<string>
@@ -164,9 +164,10 @@
 	<fstream>
 	<vector>
 
-1618052091 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\github\tdg-projet\src\admin.cpp
+1618058633 source:c:\users\nicolas\onedrive - groupe inseec (poce)\ing2\s2\piscine\github\tdg-projet\src\admin.cpp
 	"Admin.h"
 	<vector>
+	<windows.h>
 
 1618050355 c:\users\aurel\documents\github\tdg-projet\include\admin.h
 	<iostream>

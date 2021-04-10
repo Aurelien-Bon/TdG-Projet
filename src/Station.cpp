@@ -246,18 +246,28 @@ void Station::afficher()
 void Station::AffichagePoint()
 {
     system("cls");                  // On affiche ici tous les lieux du domaine
-    Goto(1,5);
+    Goto(0,3);
+        std::cout<<"*************************************************************";
+        for(int i=3;i<45;i++){
+            Goto(0,i);
+            std::cout<<"*";
+            Goto(60,i);
+            std::cout<<"*";
+        }
+        Goto(0,45);
+        std::cout<<"*************************************************************";
+    Goto(4,5);
     int cpt=1;
     std::cout<<"Choisissez un lieu parmi les suivants:"<<std::endl;
     for(auto& elem:m_lieu)
     {
-        Goto(1,cpt+6);
+        Goto(4,cpt+6);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
         cpt++;
     }
-    Goto(40,5);     // on propose à l'utilisateur de s'intéresser à un lieu.
+    Goto(48,5);     // on propose à l'utilisateur de s'intéresser à un lieu.
     int choix=0;
     do
     {
@@ -1124,47 +1134,81 @@ void Station::Trajet2point()
 {
     int cpt=1;
     system("cls");
+    Goto(0,3);
+    std::cout<<"*************************************************************";
+    for(int i=3;i<11;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,11);
+    std::cout<<"*************************************************************";
     Goto(1,5+cpt);
-    std::cout << "Que voulez vous faire ?"<<std::endl;
-    std::cout << "1. Plus court trajet en nombre d'etape."<<std::endl;
-    std::cout << "2. Plus court trajet en terme de temps."<<std::endl;
+    std::cout << "\tQue voulez vous faire ?"<<std::endl;
+    std::cout << "\t1. Plus court trajet en nombre d'etape(s)."<<std::endl;
+    std::cout << "\t2. Plus court trajet en terme de temps."<<std::endl;
     int choix;
+    Goto(35,5+cpt);
     do
     {
         std::cin>>choix;
     }while(choix<0 || choix>2);     // en fonction des cas, l'utilisateur peut décider de prendre un trajet qui ne respecte pas forcément, autrement retour au menu
     system("cls");
+    Goto(0,3);
+    std::cout<<"*************************************************************";
+    for(int i=3;i<45;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,45);
+    std::cout<<"*************************************************************";
     if(choix==1)
     {
+        Goto(4,5);             // on propose un lieu de départ et un lieu d'arrivée à étudier
+        std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
         cpt=1;
         for(auto& elem:m_lieu)  //  Pour chaque elem dans le vecteur, on affiche les elem correspondant à chaque lieu
         {
-            Goto(1,cpt+5);
+            Goto(4,cpt+6);
             std::cout<<elem.getNbLieu()<<". Lieu: ";
             std::cout<<elem.getLieu()<<" a ";
             std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
             cpt++;
         }
-        Goto(45,cpt+8);             // on propose un lieu de départ et un lieu d'arrivée à étudier
-        std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
+
         int debut=0;
+        Goto(40,5);
         do
         {
             std::cin>>debut;
         }while(debut<0 || debut>m_nbLieu);
         system("cls");
         cpt=1;
+         Goto(0,3);
+        std::cout<<"*************************************************************";
+        for(int i=3;i<45;i++){
+            Goto(0,i);
+            std::cout<<"*";
+            Goto(60,i);
+            std::cout<<"*";
+        }
+        Goto(0,45);
+        std::cout<<"*************************************************************";
 
         for(auto& elem:m_lieu)
         {
-            Goto(1,cpt+5);
+            Goto(4,cpt+6);
             std::cout<<elem.getNbLieu()<<". Lieu: ";
             std::cout<<elem.getLieu()<<" a ";
             std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
             cpt++;
         }
-        Goto(45,cpt+8);
+        Goto(4,5);
         std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+        Goto(40,5);
         int fin=0;
         do
         {
@@ -1181,7 +1225,7 @@ void Station::Trajet2point()
         }
         else
         {
-            std::cout << "Plus court trajet en nombre d'etape pour atteindre ";
+            std::cout << "Plus court trajet en nombre d'etape(s) pour atteindre ";
             std::cout << m_lieu[fin-1].getLieu() << " depuis ";
             std::cout << m_lieu[debut-1].getLieu() << " avec le critere "<<m_mode<<"!"<<std::endl;
             std::queue<int> resultat;
@@ -1205,10 +1249,12 @@ void Station::Trajet2point()
             float tempTotal=0;
             while(!resultat.empty())//on recupere l'arete avec le moins de flow
             {
+                std::cout<<std::endl;
                 for(auto& elem:m_trajet)
                 {
                     if(elem.getFin()==r1&&elem.getDebut()==resultat.front()&&elem.getSelec())
                     {
+                        CouleurCase(elem.getType());
                         std::cout<<"Vous empruntez le trajet : "<<elem.getNomTrajet();
                         std::cout<<" pour aller de "<< m_lieu[elem.getDebut()-1].getLieu();
                         std::cout<<" vers "<<m_lieu[elem.getFin()-1].getLieu();
@@ -1219,42 +1265,66 @@ void Station::Trajet2point()
                 }
                 r1=resultat.front();
                 resultat.pop();
+                CouleurReset();
             }
-            std::cout << "Pour une durée total de "<<affichageTemps(tempTotal);
+            std::cout << "\nPour une duree totale de "<<affichageTemps(tempTotal);
         }
     }
     else
     {
+        Goto(0,3);
+        std::cout<<"*************************************************************";
+        for(int i=3;i<45;i++){
+            Goto(0,i);
+            std::cout<<"*";
+            Goto(60,i);
+            std::cout<<"*";
+        }
+        Goto(0,45);
+        std::cout<<"*************************************************************";
         cpt=1;
         for(auto& elem:m_lieu)  //  Pour chaque elem dans le vecteur, on affiche les elem correspondant à chaque lieu
         {
-            Goto(1,cpt+5);
+            Goto(4,cpt+6);
             std::cout<<elem.getNbLieu()<<". Lieu: ";
             std::cout<<elem.getLieu()<<" a ";
             std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
             cpt++;
         }
-        Goto(45,cpt+8);             // on propose un lieu de départ et un lieu d'arrivée à étudier
+        Goto(4,5);             // on propose un lieu de départ et un lieu d'arrivée à étudier
         std::cout << "De quel lieu voulez-vous partir?"<<std::endl;
         int debut=0;
+        Goto(40,5);
         do
         {
             std::cin>>debut;
         }while(debut<0 || debut>m_nbLieu);
         system("cls");
         cpt=1;
+        Goto(0,3);
+        std::cout<<"*************************************************************";
+        for(int i=3;i<45;i++){
+            Goto(0,i);
+            std::cout<<"*";
+            Goto(60,i);
+            std::cout<<"*";
+        }
+        Goto(0,45);
+        std::cout<<"*************************************************************";
 
         for(auto& elem:m_lieu)
         {
-            Goto(1,cpt+5);
+            Goto(4,cpt+6);
             std::cout<<elem.getNbLieu()<<". Lieu: ";
             std::cout<<elem.getLieu()<<" a ";
             std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
             cpt++;
         }
-        Goto(45,cpt+8);
+        Goto(4,5);
         std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
+
         int fin=0;
+        Goto(40,5);
         do
         {
             std::cin>>fin;
@@ -1361,14 +1431,24 @@ void Station::FordFercuson()
 {
     system("cls");
     std::cout<<std::endl;
-    Goto(1,5);
+    Goto(0,3);
     int cpt=1;
     int arretefinal;
     int arreteminimun=-1;
+    std::cout<<"*************************************************************";
+    for(int i=3;i<45;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,45);
+    std::cout<<"*************************************************************";
+    Goto(4,5);
     std::cout << "De quel lieu voulez-vous partir?"<<std::endl;     // choix du départ de l'arrivée
     for(auto& elem:m_lieu)
     {
-        Goto(1,6+cpt);
+        Goto(4,6+cpt);
         std::cout<<elem.getNbLieu()<<". Lieu: ";
         std::cout<<elem.getLieu()<<" a ";
         std::cout<<elem.getAltitude()<<"m d'altitude"<<std::endl;
@@ -1381,7 +1461,17 @@ void Station::FordFercuson()
         std::cin>>debut;
     }while(debut<0 || debut>m_nbLieu);
     system("cls");
-    Goto(1,5);
+    Goto(0,3);
+     std::cout<<"*************************************************************";
+    for(int i=3;i<45;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,45);
+    std::cout<<"*************************************************************";
+    Goto(4,5);
     cpt=1;
     std::cout << "A quel endroit voulez-vous allez? "<<std::endl;
     for(auto& elem:m_lieu)
@@ -1480,11 +1570,13 @@ void Station::FordFercuson()
     Goto(1,9);
     std::cout<<"Est de "<<flowfinal<<" personne(s) par heure."<<std::endl;
     Goto(1,11);
-    std::cout<< "Les Trajet satueres sont: "<<std::endl;
+    std::cout<< "Les trajets satures sont: "<<std::endl;
     for(auto& elem:m_trajet)
     {
         if(elem.getMaxFlow()==elem.getFlow())
         {
+            CouleurCase(elem.getType());
+            std::cout<<std::endl;
             std::cout<<elem.getNomTrajet()<<" qui est ";
             std::cout<<elem.TradType()<<" qui a pour capacite de ";
             std::cout<<elem.getFlow()<<" personne(s) par heure."<<std::endl;
@@ -1492,8 +1584,9 @@ void Station::FordFercuson()
     }
    // delay(20000);
    // system("cls");
+   CouleurReset();
     leave();
-    CouleurReset();
+
 }
 void Station::fermeturePiste()
 {

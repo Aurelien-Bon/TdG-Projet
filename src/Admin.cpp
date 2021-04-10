@@ -1,5 +1,6 @@
 #include "Admin.h"
 #include <vector>
+#include <windows.h>
 
 Admin::Admin(std::string file)
 {
@@ -26,26 +27,48 @@ Admin::~Admin()
 {
     //dtor
 }
-
+void Gotox(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
+{
+    COORD mycoord;
+    mycoord.X = col;
+    mycoord.Y = nb;
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
+}
 void Admin::Connexion()
 {
     system("cls");
     int choix=1;
     while(choix==1&&m_connecte==false)
     {
+        Gotox(0,3);
+        std::cout<<"*****************************************";
+        for(int i=3;i<20;i++){
+            Gotox(0,i);
+            std::cout<<"*";
+            Gotox(40,i);
+            std::cout<<"*";
+        }
+        Gotox(0,20);
+        std::cout<<"*****************************************";
+        Gotox(4,4);
         std::cout << "1. Connexion"<<std::endl;
+        Gotox(4,5);
         std::cout << "2. Quitter"<<std::endl;
+        Gotox(4,6);
         std::cout << "Que voulez vous faire: ";
+        Gotox(30,6);
         do{
             std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
         }while(choix<0 || choix>2);
         if(choix==1)
         {
             std::string id,mdp, ligne;
-            std::cout<<"*********Connexion*********\n"<<std::endl;
-            std::cout<<"Veuillez saisir votre nom d'utilisateur"<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<"\t*******Connexion*********\n"<<std::endl;
+            std::cout<<"\tNom d'utilisateur: ";
             std::cin>>id;
-            std::cout<<"Veuillez saisir votre mot de passe"<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<"\tMot de passe:";
             std::cin>>mdp;
             bool test=false;
             for(auto& elem:m_infoFile)
@@ -71,7 +94,7 @@ void Admin::Deconnexion()
 {
     system("cls");
     int choix;
-    std::cout << "Voulez vous vraiment vous deconecter? "<<std::endl;
+    std::cout << "Voulez vous vraiment vous deconnecter? "<<std::endl;
     std::cout << "1. Oui"<<std::endl;
     std::cout << "2. Non"<<std::endl;
     do{
