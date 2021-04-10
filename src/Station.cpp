@@ -1726,13 +1726,27 @@ void Station::InfoPiste()
 {
     int nb;
     system("cls");
+    Goto(0,3);
+      std::cout<<"*************************************************************";
+    for(int i=3;i<8;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,8);
+    std::cout<<"*************************************************************";
+    Goto(4,5);
     std::cout << "1. Info ouverture lieu"<<std::endl;
+    Goto(4,6);
     std::cout << "2. Info ouverture trajet"<<std::endl;
+    Goto(30,6);
     do{
         std::cin>>nb;                // l'utilisateur fait une saisie d'un trajet
     }while(nb<0 || nb>2);
     if(nb==1)
     {
+        system("cls");
         int cpt=5;
         for(auto& elem:m_lieu)
         {
@@ -1742,7 +1756,6 @@ void Station::InfoPiste()
             else{
                 CouleurCase("R");
             }
-
             Goto(4,cpt);
             std::cout << "Lieu n" << elem.getNbLieu();
             Goto(40,cpt);
@@ -1756,6 +1769,7 @@ void Station::InfoPiste()
     }
     else
     {
+        system("cls");
         int cpt=5;
         for(auto& elem:m_trajet)
         {
@@ -1765,7 +1779,6 @@ void Station::InfoPiste()
             else{
                 CouleurCase("R");
             }
-
             Goto(4,cpt);
             std::cout << "Trajet n" << elem.getNbTrajet();
             Goto(40,cpt);

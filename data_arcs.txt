@@ -1,5 +1,5 @@
 37
-1	villaroger	1200	Ouvert
+1	villaroger	1200	Fermer
 2	2	1425	Ouvert
 3	3	2135	Ouvert
 4	4	2458	Ouvert
@@ -8,7 +8,7 @@
 7	arc2000	2120	Ouvert
 8	pre-saint-esprit	1822	Ouvert
 9	9	2120	Ouvert
-10	10	2015	Ouvert
+10	10	2015	Fermer
 11	11	2195	Ouvert
 12	12	2670	Ouvert
 13	grand-col	2835	Ouvert
@@ -37,23 +37,23 @@
 36	arc1800	1715	Ouvert
 37	37	2100	Ouvert
 95
-1	aiguille-rouge	TPH	12	5	Ouvert
+1	aiguille-rouge	TPH	12	5	Fermer
 2	aiguille-rouge1	N	5	4	Ouvert
 3	aiguille-rouge2	N	4	3	Ouvert
 4	aiguille-rouge3	N	3	2	Ouvert
-5	aiguille-rouge4	N	2	1	Ouvert
+5	aiguille-rouge4	N	2	1	Fermer
 6	arandeliere	R	5	12	Ouvert
 7	arpette	TS	31	15	Ouvert
 8	belvedere1	B	18	19	Ouvert
 9	belvedere2	B	19	31	Ouvert
 10	belvedere3	B	31	35	Ouvert
-11	bois-de-l'ours	TS	10	15	Ouvert
+11	bois-de-l'ours	TS	10	15	Fermer
 12	bosses	TK	16	26	Ouvert
 13	cachette	R	21	30	Ouvert
 14	cachette	TSD	30	21	Ouvert
 15	carreley	R	31	36	Ouvert
 16	carreley	TS	36	31	Ouvert
-17	cascade	B	10	8	Ouvert
+17	cascade	B	10	8	Fermer
 18	chantel	B	34	36	Ouvert
 19	chantel	TS	36	34	Ouvert
 20	clair-blanc	R	15	31	Ouvert
@@ -89,8 +89,8 @@
 50	lanches	N	12	9	Ouvert
 51	lanchettes	TS	7	4	Ouvert
 52	malgovert	R	18	20	Ouvert
-53	marmotte	TK	10	11	Ouvert
-54	marmottes	B	11	10	Ouvert
+53	marmotte	TK	10	11	Fermer
+54	marmottes	B	11	10	Fermer
 55	mont-blanc	B	20	30	Ouvert
 56	mont-blanc	TS	30	20	Ouvert
 57	muguet	N	17	8	Ouvert
@@ -98,7 +98,7 @@
 59	navette1800-1600	BUS	36	30	Ouvert
 60	navette1600-2000	BUS	30	7	Ouvert
 61	navette2000-1600	BUS	7	30	Ouvert
-62	ours	N	15	10	Ouvert
+62	ours	N	15	10	Fermer
 63	plagnettes	TSD	11	26	Ouvert
 64	plan	B	23	11	Ouvert
 65	plan-des-eaux	B	26	16	Ouvert
@@ -107,7 +107,7 @@
 68	plan-violettes	TS	2	3	Ouvert
 69	pre-saint-esprit	TS	8	11	Ouvert
 70	refuge	N	13	14	Ouvert
-71	replat	TS	1	2	Ouvert
+71	replat	TS	1	2	Fermer
 72	reservoir	R	4	6	Ouvert
 73	rhonaz	B	3	8	Ouvert
 74	saint-jacques	B	11	9	Ouvert
@@ -115,7 +115,7 @@
 76	snowpark	SURF	24	31	Ouvert
 77	soliet1	R	4	3	Ouvert
 78	soliet2	R	3	2	Ouvert
-79	soliet3	R	2	1	Ouvert
+79	soliet3	R	2	1	Fermer
 80	tetras	R	27	35	Ouvert
 81	tommelet	TK	30	29	Ouvert
 82	transarc1	TC	36	37	Ouvert
@@ -124,13 +124,13 @@
 85	vagere	TK	35	27	Ouvert
 86	vallee-de-l-arc1	B	14	16	Ouvert
 87	vallee-de-l-arc2	B	16	11	Ouvert
-88	vallee-de-l-arc	R	11	10	Ouvert
+88	vallee-de-l-arc	R	11	10	Fermer
 89	varet	TC	9	12	Ouvert
 90	vezaille	TK	28	29	Ouvert
 91	villards	B	37	36	Ouvert
 92	villards	TSD	36	33	Ouvert
 93	villaroger1	B	8	2	Ouvert
-94	villaroger2	B	2	1	Ouvert
+94	villaroger2	B	2	1	Fermer
 95	vitesse	KL	12	6	Ouvert
 1
 1

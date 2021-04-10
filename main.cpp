@@ -13,7 +13,7 @@ int main()
 {
     Admin administrateur("id.txt");
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
-    system("mode con cols=200 lines=100");
+    system("mode con cols=200 lines=130");
     Station test("data_arcs.txt");
     bool quitter=false;
     do
@@ -47,7 +47,7 @@ int main()
         Gotom(4,10);
         std::cout << "5. Flow maximum entre 2 points"<<std::endl;
         Gotom(4,11);
-        std::cout << "6. Information des piste"<<std::endl;
+        std::cout << "6. Information des pistes"<<std::endl;
         Gotom(4,12);
         if(administrateur.getConnect()==false)
             std::cout << "7. Connexion administrateur"<<std::endl;
