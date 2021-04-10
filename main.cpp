@@ -51,17 +51,31 @@ int main()
         if(administrateur.getConnect()==false)
             std::cout << "7. Quitter"<<std::endl;
         else
-            std::cout << "7. Deconnexion"<<std::endl;
-        Gotom(1,13);
+            std::cout << "7. Ajouter un compte administrateur"<<std::endl;
         if(administrateur.getConnect()==true)
-            std::cout << "8. Quitter"<<std::endl;
-        Gotom(1,14);
+        {
+            Gotom(1,13);
+            std::cout << "8. Deconnexion"<<std::endl;
+        }
+        if(administrateur.getConnect()==true)
+        {
+            Gotom(1,14);
+            std::cout << "9. Quitter"<<std::endl;
+        }
+
+        if(administrateur.getConnect()==false)
+            Gotom(1,13);
+        else
+            Gotom(1,15);
         std::cout << "Que voulez-vous faire?: ";
-        Gotom(25,14);
+        if(administrateur.getConnect()==false)
+            Gotom(25,13);
+        else
+            Gotom(25,15);
         int choix=0;
         int maxchoix=7;
         if(administrateur.getConnect()==true)
-            maxchoix=8;
+            maxchoix=9;
         do
         {
             std::cin>>choix;
@@ -85,11 +99,20 @@ int main()
             break;
         case 6:
             if(administrateur.getConnect()==false)
-                administrateur.Connection();
+                administrateur.Connexion();
             else
                 test.fermeturePiste();
             break;
         case 7:
+            if(administrateur.getConnect()==false)
+                quitter=true;
+            else
+                administrateur.CreerCompte();
+            break;
+        case 8:
+            administrateur.Deconnexion();
+            break;
+        case 9:
             quitter=true;
             system("cls");
             break;

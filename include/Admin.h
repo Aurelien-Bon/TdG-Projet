@@ -10,7 +10,8 @@ class Admin
     public:
         Admin(std::string file);
          ~Admin();
-        void Connection();
+        void Connexion();
+        void Deconnexion();
         std::string getID();
         void CreerCompte();
         bool getConnect();

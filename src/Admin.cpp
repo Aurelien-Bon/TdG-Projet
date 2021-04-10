@@ -10,7 +10,7 @@ Admin::Admin(std::string file)
     if(!datafeed){
         std::cerr<<"Probleme de connexion"<<std::endl;
     }
-    while(std::getline(datafeed,ligne))
+    while (!datafeed.eof())
     {
         std::string id1, mdp1;
         datafeed >>id1 >> mdp1;
@@ -27,10 +27,11 @@ Admin::~Admin()
     //dtor
 }
 
-void Admin::Connection()
+void Admin::Connexion()
 {
+    system("cls");
     int choix=1;
-    while(choix==1)
+    while(choix==1&&m_connecte==false)
     {
         std::cout << "1. Connexion"<<std::endl;
         std::cout << "2. Quitter"<<std::endl;
@@ -63,40 +64,55 @@ void Admin::Connection()
                 m_mdp=mdp;
                 m_connecte=true;
             }
-            //for(auto& elem:m_)
         }
     }
 }
-std::string Admin::getID(){
+void Admin::Deconnexion()
+{
+    system("cls");
+    int choix;
+    std::cout << "Voulez vous vraiment vous deconecter? "<<std::endl;
+    std::cout << "1. Oui"<<std::endl;
+    std::cout << "2. Non"<<std::endl;
+    do{
+        std::cin>>choix;                // l'utilisateur fait une saisie d'un trajet
+    }while(choix<0 || choix>2);
+    if(choix==1)
+    {
+        m_idadmin="";
+        m_mdp="";
+        m_connecte=false;
+    }
+}
+std::string Admin::getID()
+{
     return m_idadmin;
 }
-void Admin::CreerCompte(){
-    std::vector<std::string>copie;
+void Admin::CreerCompte()
+{
+    system("cls");
+    std::vector<std::string>newCompte;
     std::string id, mdp,ligne;
     std::cout<<"*********Creer un compte*********\n"<<std::endl;
     std::cout<<"Veuillez saisir votre nom d'utilisateur"<<std::endl;
     std::cin>>id;
     std::cout<<"Veuillez saisir votre mot de passe"<<std::endl;
     std::cin>>mdp;
-    std::ifstream ifs{m_file};  // ouverture du flux de lecture
-    if (!ifs)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + m_file );
-    while(std::getline(ifs,ligne)){
-        copie.push_back(ligne);
-    }
-    ifs.close();
+    newCompte.push_back(id);
+    newCompte.push_back(mdp);
+    m_infoFile.push_back(newCompte);
     std::ofstream datafeed(m_file);
-
     if(!datafeed){
         std::cerr<<"Probleme d'ecriture"<<std::endl;
     }
     else{
-        for(int i=0;i<copie.size();i++){
-        datafeed << copie[i] << copie[i+1];
+        for(auto& elem:m_infoFile)
+        {
+            datafeed << elem[0]<<" "<< elem[1];
+            datafeed << std::endl;
         }
-        datafeed<<id << " "<< mdp;
     }
-    datafeed.close();
+    std::cout<<"Compte crée!"<<std::endl;
 }
 bool Admin::getConnect()
 {
