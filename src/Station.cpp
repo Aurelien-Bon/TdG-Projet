@@ -30,8 +30,9 @@ void delay(int delay_time){ // Créer un temps d'attente
 }
 void leave()
 {   // fonction utilisée pour retourner au menu
-    std::cout<<"\n\n\n\n------------------------------------------------------------------------------"<<std::endl;
-    std::cout <<"Appuyez sur ESC pour revenir au menu"<<std::endl;
+    std::cout<<"\n\n\n\n-------------------------------------------------------------------------------------------------------"<<std::endl;
+    std::cout <<"\t\t\nAppuyez sur ESC pour revenir au menu"<<std::endl;
+    std::cout<<"\n\n\n\n-------------------------------------------------------------------------------------------------------"<<std::endl;
     char key_press;
     int ascii_value;
     while(1)///https://fahad-cprogramming.blogspot.com
@@ -306,8 +307,19 @@ void Station::AffichageTrajet()
 {
     int cpt=5;
     system("cls");          // on affiche chaque trajet existant dans le domaine skiable
-    Goto(5,cpt);
+
     int choix=0;
+    Goto(0,3);
+        std::cout<<"*************************************************************";
+        for(int i=3;i<16;i++){
+            Goto(0,i);
+            std::cout<<"*";
+            Goto(60,i);
+            std::cout<<"*";
+        }
+        Goto(0,16);
+        std::cout<<"*************************************************************";
+        Goto(5,cpt);
     std::cout <<"Souhaitez-vous regarder un type de trajet precis ?"<<std::endl;
     Goto(5,cpt+1);
     std::cout<<"1.Pistes Vertes"<<std::endl;
