@@ -32,7 +32,7 @@ void Admin::Connection()
     int choix=1;
     while(choix==1)
     {
-        std::cout << "1. Connection"<<std::endl;
+        std::cout << "1. Connexion"<<std::endl;
         std::cout << "2. Quitter"<<std::endl;
         std::cout << "Que voulez vous faire: ";
         do{
@@ -58,7 +58,7 @@ void Admin::Connection()
                 std::cout<<"Erreur dans votre nom d'utilisateur ou mot de passe"<<std::endl;
             }
             else{
-                std::cout <<"Connexion réussie"<<std::endl;
+                std::cout <<"Connexion reussie"<<std::endl;
                 m_idadmin=id;
                 m_mdp=mdp;
                 m_connecte=true;
@@ -88,7 +88,7 @@ void Admin::CreerCompte(){
     std::ofstream datafeed(m_file);
 
     if(!datafeed){
-        std::cerr<<"Probleme d'écriture"<<std::endl;
+        std::cerr<<"Probleme d'ecriture"<<std::endl;
     }
     else{
         for(int i=0;i<copie.size();i++){

@@ -44,14 +44,14 @@ int main()
         std::cout << "5. Flow maximum entre 2 point"<<std::endl;
         Gotom(1,11);
         if(administrateur.getConnect()==false)
-            std::cout << "6. Connection administrateur"<<std::endl;
+            std::cout << "6. Connexion administrateur"<<std::endl;
         else
             std::cout << "6. Gestion fermeture des piste"<<std::endl;
         Gotom(1,12);
         if(administrateur.getConnect()==false)
             std::cout << "7. Quitter"<<std::endl;
         else
-            std::cout << "7. Deconnection"<<std::endl;
+            std::cout << "7. Deconnexion"<<std::endl;
         Gotom(1,13);
         if(administrateur.getConnect()==true)
             std::cout << "8. Quitter"<<std::endl;

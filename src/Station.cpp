@@ -523,12 +523,12 @@ void Station::AffichageTrajet()
         break;
     }
 
-    Goto(1,cpt+3);
+    Goto(1,0);
     CouleurReset();
     int choixe=0;
     if(!copie.empty())
     {
-        std::cout<<"\n\nVeuillez saisir un nombre correspondant au trajet qui vous interesse "<<std::endl;
+        std::cout<<"\n\nVeuillez saisir un nombre correspondant au trajet qui vous interesse ";
 
         bool test=false;
         do{
