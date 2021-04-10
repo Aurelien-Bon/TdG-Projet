@@ -15,13 +15,6 @@ int main()
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
     system("mode con cols=200 lines=100");
     Station test("data_arcs.txt");
-    //Station test("testprojet.txt");
-    //test.Flotmin2pts();
-    //HANDLE console;                                 //couleur console
-    //console = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    //SetConsoleTextAttribute(console,31);
-   //system("Color 3F");
     bool quitter=false;
     do
     {

@@ -860,7 +860,7 @@ void Station::Critere()
             elem=1;
         }
     }
-    switch(choix)                                                           // on modif les valeurs de certains coeff, pour faire "bug" notre algorithme pour qu'il évitent de prendre certains trajets en fonction du type
+    switch(choix)                                      // on modif les valeurs de certains coeff, pour faire "bug" notre algorithme pour qu'il évitent de prendre certains trajets en fonction du type
     {
     case 1:
         m_coef[0]=200;
@@ -913,7 +913,7 @@ void Station::Personnaliser()
     int choix;
     do
     {
-        std::cout << "Mode personnalise (selectionner vos propres criteres): "<<std::endl;
+        std::cout << "Mode personnalise (selectionnez vos propres criteres): "<<std::endl;
         CouleurCase("V");
         std::cout << "1. Piste Verte: ";
         if(m_coef[0]==200)
@@ -1582,8 +1582,6 @@ void Station::FordFercuson()
             std::cout<<elem.getFlow()<<" personne(s) par heure."<<std::endl;
         }
     }
-   // delay(20000);
-   // system("cls");
    CouleurReset();
     leave();
 
@@ -1599,7 +1597,7 @@ void Station::fermeturePiste()
 
              for(auto& elem:m_trajet)
         {
-            if(elem.getFermeture()=="Ouvert"){
+            if(elem.getFermeture()=="Ouvert"){      // on affiche tous les trajets et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
                 CouleurCase("V");
             }
             else{
