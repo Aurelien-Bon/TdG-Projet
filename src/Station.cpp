@@ -1443,6 +1443,7 @@ void Station::FordFercuson()
     system("cls");
     std::cout<<std::endl;
     Goto(0,3);
+    int n=0;
     int cpt=1;
     int arretefinal;
     int arreteminimun=-1;
@@ -1509,6 +1510,7 @@ void Station::FordFercuson()
     int flowfinal=0;
     int flowmin=0;
     std::queue<float> resultPetit;
+    cpt=1;
     while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
     {
         int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
@@ -1549,12 +1551,22 @@ void Station::FordFercuson()
         }
         int r2;
         std::queue<float>save;
+        n++;
+        Goto(1,11+cpt);
+        std::cout << "Trajet n° "<<n<<": "<<std::endl;
         while(!resul2.empty())//on ajoute le flow a chaque arrete
         {
             r2=resul2.front();
             m_trajet[r2-1].setFlow(m_trajet[r2-1].getFlow()+flowmax);
             save.push(r2);
             resul2.pop();
+            CouleurCase(m_trajet[r2-1].getType());
+            std::cout<<m_trajet[r2-1].getNomTrajet()<<" qui est ";
+            std::cout<<m_trajet[r2-1].TradType()<<" qui a pour capacite de ";
+            std::cout<<m_trajet[r2-1].getFlow()<<" personne(s) par heure."<<std::endl;
+            cpt++;
+            cpt++;
+            CouleurReset();
         }
         flowfinal+=flowmax;
         for(auto& elem:m_trajet)
@@ -1570,17 +1582,16 @@ void Station::FordFercuson()
             flowmin=flowmax;
         }
     }
+    CouleurReset();
     Goto(1,5);
     std::cout<<"La capacite maximale du lieu ";
     std::cout<<m_lieu[debut-1].getLieu()<<" a ";
-    std::cout<<m_lieu[debut-1].getAltitude()<<"m d'altitude"<<std::endl;
-    Goto(1,7);
+    std::cout<<m_lieu[debut-1].getAltitude()<<"m d'altitude";
     std::cout<<"Au lieu ";
     std::cout<<m_lieu[fin-1].getLieu()<<" a ";
     std::cout<<m_lieu[fin-1].getAltitude()<<"m d'altitude"<<std::endl;
-    Goto(1,9);
     std::cout<<"Est de "<<flowfinal<<" personne(s) par heure."<<std::endl;
-    Goto(1,11);
+    Goto(1,12+cpt);
     std::cout<< "Les trajets satures sont: "<<std::endl;
     for(auto& elem:m_trajet)
     {
@@ -1593,7 +1604,7 @@ void Station::FordFercuson()
             std::cout<<elem.getFlow()<<" personne(s) par heure."<<std::endl;
         }
     }
-   CouleurReset();
+    CouleurReset();
     leave();
 
 }
@@ -1601,8 +1612,21 @@ void Station::fermeturePiste()
 {
     int nb;
     system("cls");
+    Goto(0,3);
+    std::cout<<"*************************************************************";
+    for(int i=3;i<8;i++){
+        Goto(0,i);
+        std::cout<<"*";
+        Goto(60,i);
+        std::cout<<"*";
+    }
+    Goto(0,8);
+    std::cout<<"*************************************************************";
+    Goto(4,5);
     std::cout << "1. Parametrage lieu"<<std::endl;
+    Goto(4,6);
     std::cout << "2. Parametrage trajet"<<std::endl;
+    Goto(30,6);
     do{
         std::cin>>nb;                // l'utilisateur fait une saisie d'un trajet
     }while(nb<0 || nb>2);
@@ -1634,6 +1658,7 @@ void Station::fermeturePiste()
                 std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
             }
+            CouleurReset();
             std::cout<<"\n"<<m_nbLieu+1<<". Quitter"<<std::endl;
             Goto(200,150);
             std::cout<<"\n\nVeuillez saisir le lieu qui vous interesse: ";
@@ -1698,6 +1723,7 @@ void Station::fermeturePiste()
                 std::cout <<" est actuellement: "<<elem.getFermeture()<<std::endl;
                 cpt++;
             }
+            CouleurReset();
             std::cout<<"\n"<<m_nbTrajet+1<<". Quitter"<<std::endl;
             Goto(200,150);
             std::cout<<"\n\nVeuillez saisir le trajet qui vous interesse: ";
