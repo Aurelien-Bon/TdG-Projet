@@ -2,6 +2,7 @@
 #include "Station.h"
 #include "windows.h"
 #include "Admin.h"
+///Aurélien Bon & Nicolas Dreyfus
 void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
 {
     COORD mycoord;
@@ -11,10 +12,10 @@ void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
 }
 int main()
 {
-    Admin administrateur("id.txt");
+    Admin administrateur("id.txt");// appel de la classe Admin pour géré la connexion adimistrateur
     std::cout<<"Ouvrez votre console en plein écran"<<std::endl;
     system("mode con cols=200 lines=130");
-    Station test("data_arcs.txt");
+    Station test("data_arcs.txt");//appel de la fonction de la classe Station avec le fichier de config
     bool quitter=false;
     do
     {
@@ -52,21 +53,21 @@ int main()
         if(administrateur.getConnect()==false)
             std::cout << "7. Connexion administrateur"<<std::endl;
         else
-            std::cout << "7. Gestion fermeture des pistes"<<std::endl;
+            std::cout << "7. Gestion fermeture des pistes"<<std::endl;//si admin connecter
         Gotom(4,13);
         if(administrateur.getConnect()==false)
             std::cout << "8. Quitter"<<std::endl;
         else
-            std::cout << "8. Ajouter un compte administrateur"<<std::endl;
+            std::cout << "8. Ajouter un compte administrateur"<<std::endl;//si admin connecter
         if(administrateur.getConnect()==true)
         {
             Gotom(4,14);
-            std::cout << "9. Deconnexion"<<std::endl;
+            std::cout << "9. Deconnexion"<<std::endl;//si admin connecter
         }
         if(administrateur.getConnect()==true)
         {
             Gotom(4,15);
-            std::cout << "10. Quitter"<<std::endl;
+            std::cout << "10. Quitter"<<std::endl;//si admin connecter
         }
 
         if(administrateur.getConnect()==false)
@@ -110,7 +111,7 @@ int main()
             if(administrateur.getConnect()==false)
                 administrateur.Connexion();
             else
-                test.fermeturePiste();
+                test.fermeturePiste();//si admin connecter
             break;
         case 8:
             if(administrateur.getConnect()==false)
@@ -119,13 +120,13 @@ int main()
                 system("cls");
             }
             else
-                administrateur.CreerCompte();
+                administrateur.CreerCompte();//si admin connecter
             break;
         case 9:
-            administrateur.Deconnexion();
+            administrateur.Deconnexion();//si admin connecter
             break;
         case 10:
-            quitter=true;
+            quitter=true;//si admin connecter
             system("cls");
             break;
         }

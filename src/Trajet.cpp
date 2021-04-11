@@ -1,14 +1,7 @@
 #include "Trajet.h"
 #include "windows.h"
-void Goto(int col)
-{
-    COORD mycoord;
-    mycoord.X = col;
-    //mycoord.Y = getNb();
-    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
-}
 
-Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b,std::string fermer)
+Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b,std::string fermer)///Constructeur
 {
     m_nbTrajet = nbTrajet;
     m_nomTrajet = nomTrajet;
@@ -17,12 +10,12 @@ Trajet::Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b
     m_B = b;
     m_fermeture=fermer;
 }
-Trajet::~Trajet() {}
+Trajet::~Trajet() {}///Destructeur
 float Trajet::getTemps()  // retourne le temps d'une arete
 {
     return m_temps;
 }
-void Trajet::setTemps(float temps)
+void Trajet::setTemps(float temps)//setter de m_temps
 {
     m_temps = temps;
 }
@@ -46,20 +39,20 @@ void Trajet::afficher() // affiche départ -- > arrivée et son poids
     //Goto(80);
     std::cout << "\t| Duree: " << m_temps << " minutes" << std::endl;
 }
-std::string Trajet::getType()
+std::string Trajet::getType()//getter de m_type
 {
     return m_type;
 }
-std::string Trajet::getNomTrajet()
+std::string Trajet::getNomTrajet()//getter de m_nomTrajet
 {
     return m_nomTrajet;
 }
-int Trajet::getNbTrajet()
+int Trajet::getNbTrajet()//getter de m_nbTrajet
 {
     return m_nbTrajet;
 }
 
-std::string Trajet::TradType()
+std::string Trajet::TradType()//Methode d'affichage par rapport au type
 {
     std::string ecrit="";
     if(m_type=="V")
@@ -112,43 +105,43 @@ std::string Trajet::TradType()
     }
     return ecrit;
 }
-void Trajet::setReelTemps(float temps)
+void Trajet::setReelTemps(float temps)//setter de m_reelTemps
 {
     m_reelTemps=temps;
 }
-float Trajet::getReelTemps()
+float Trajet::getReelTemps()//getter de m_reelTemps
 {
     return m_reelTemps;
 }
-void Trajet::setSelec(bool selec)
+void Trajet::setSelec(bool selec)//setter de m_selec
 {
     m_selec=selec;
 }
-bool Trajet::getSelec()
+bool Trajet::getSelec()//getter de m_selec
 {
     return m_selec;
 }
-void Trajet::setFlow(int flow)
+void Trajet::setFlow(int flow)//setter de m_flow
 {
     m_flow=flow;
 }
-void Trajet::setMaxFlow(int flowMax)
+void Trajet::setMaxFlow(int flowMax)//setter de m_flowMax
 {
     m_flowMax=flowMax;
 }
-int Trajet::getFlow()
+int Trajet::getFlow()//getter de m_flow
 {
     return m_flow;
 }
-int Trajet::getMaxFlow()
+int Trajet::getMaxFlow()//getter de m_flowMax
 {
     return m_flowMax;
 }
-std::string Trajet::getFermeture()
+std::string Trajet::getFermeture()//getter de m_fermeture
 {
     return m_fermeture;
 }
-void Trajet::setFermeture(std::string fermer)
+void Trajet::setFermeture(std::string fermer)//setter de m_fermeture
 {
     m_fermeture=fermer;
 }

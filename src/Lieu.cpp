@@ -28,33 +28,33 @@ void Lieu::setAltitude(int alt)   // on modifie le poids d'une arete
 {
     m_altitude = alt;
 }
-void Lieu::setColor(int color)
+void Lieu::setColor(int color)//setter de m_color
 {
     m_color=color;
 }
-void Lieu::setVisite(int nb)
+void Lieu::setVisite(int nb)//setter de m_visite
 {
     m_visite=nb;
 }
-int Lieu::getColor()
+int Lieu::getColor()//getter de m_color
 {
     return m_color;
 }
-int Lieu::getVisite()
+int Lieu::getVisite()//getter de m_visite
 {
     return m_visite;
 }
-float Lieu::getTemps(){
+float Lieu::getTemps(){//getter de m_temps
 return m_temps;
 }
-void Lieu::setTemps(float temps){
+void Lieu::setTemps(float temps){//setter de m_temps
     m_temps=temps;
 }
-void Lieu::setFermeture(std::string ferme)
+void Lieu::setFermeture(std::string ferme)//setter de m_ferme
 {
     m_fermer=ferme;
 }
-std::string Lieu::getFermeture()
+std::string Lieu::getFermeture()//getter de m_ferme
 {
     return m_fermer;
 }

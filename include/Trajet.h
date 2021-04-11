@@ -17,27 +17,27 @@ private:
     int m_flowMax;
     std::string m_fermeture;
 public:
-    Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b, std::string fermer);
-    ~Trajet();
-    float getTemps();
-    void setTemps(float temps);
-    int getDebut();
-    int getFin();
+    Trajet(int nbTrajet,std::string nomTrajet, std::string type,int a, int b, std::string fermer);///Constructeur
+    ~Trajet();///Destructeur
+    float getTemps();//getter de m_temps
+    void setTemps(float temps);//setter de m_temps
+    int getDebut();//getter de m_A
+    int getFin();//getter de m_B
     void afficher();                // principalement des getter et setter, excepté des traduction par exemple V--> piste verte
-    std::string getType();
-    std::string getNomTrajet();
-    int getNbTrajet();
-    std::string TradType();
-    void setReelTemps(float temps);
-    float getReelTemps();
-    void setSelec(bool selec);
-    bool getSelec();
-    void setFlow(int flow);
-    void setMaxFlow(int flowMax);
-    int getFlow();
-    int getMaxFlow();
-    std::string getFermeture();
-    void setFermeture(std::string fermer);
+    std::string getType();//getter de type
+    std::string getNomTrajet();//getter de m_nomTrajet
+    int getNbTrajet();//setter de m_nomTrajet
+    std::string TradType();//methode qui resort le type en entier
+    void setReelTemps(float temps);//setter de m_reelTemps
+    float getReelTemps();//getter de m_reelTemps
+    void setSelec(bool selec);//setter de m_selec
+    bool getSelec();//getter de m_selec
+    void setFlow(int flow);//setter de m_flow
+    void setMaxFlow(int flowMax);//setter de m_flowMax
+    int getFlow();//getter de m_flow
+    int getMaxFlow();//getter de m_flowMax
+    std::string getFermeture();//getter de m_fermeture
+    void setFermeture(std::string fermer);//setter de m_fermeture
 };
 
 

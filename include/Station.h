@@ -35,9 +35,9 @@ public:
     std::string affichageTemps(float temps);    // une trad pour le temps
     void Trajet2point();       // chemin le plus court avec des lieux en prenant compte des critères
     void SelectionTrajet(); // Utilisation pour les extensions
-    void FordFercuson();
-    void fermeturePiste();
-    void InfoPiste();
+    void FordFercuson(); //calcul des flow
+    void fermeturePiste();//methode pour ouvrir et fermer des piste
+    void InfoPiste();//affiche les piste et sommet ouvert
 };
 
 
