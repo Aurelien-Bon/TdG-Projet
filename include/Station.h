@@ -36,8 +36,8 @@ public:
     void Trajet2point();       // chemin le plus court avec des lieux en prenant compte des critères
     void SelectionTrajet(); // Utilisation pour les extensions
     void FordFercuson(); //calcul des flow
-    void fermeturePiste();//methode pour ouvrir et fermer des piste
-    void InfoPiste();//affiche les piste et sommet ouvert
+    void fermeturePiste();//methode pour ouvrir et fermer des pistes
+    void InfoPiste();//affiche les pistes et sommets ouverts
 };
 
 

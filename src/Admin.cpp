@@ -14,11 +14,11 @@ Admin::Admin(std::string file)///Constructeur
     while (!datafeed.eof())//jusqu'a la fin du fichier
     {
         std::string id1, mdp1;
-        datafeed >>id1 >> mdp1;//lecture des 2 premier mot de la ligne
+        datafeed >>id1 >> mdp1;//lecture des 2 premiers mots de la ligne
         std::vector<std::string> n;
         n.push_back(id1);
         n.push_back(mdp1);
-        m_infoFile.push_back(n);//ajout des info dans le vecteur
+        m_infoFile.push_back(n);//ajout des infos dans le vecteur
     }
     datafeed.close();//fermeture du flux
 }
@@ -96,14 +96,14 @@ void Admin::Deconnexion()
     std::cout << "Voulez vous vraiment vous deconnecter? "<<std::endl;
     std::cout << "1. Oui"<<std::endl;
     std::cout << "2. Non"<<std::endl;
-    do{//confirmation de deconnection
+    do{//confirmation de deconnexion
         std::cin>>choix;
     }while(choix<0 || choix>2);
     if(choix==1)//si oui
     {
         m_idadmin="";
         m_mdp="";
-        m_connecte=false;//mis a faux de la connection
+        m_connecte=false;//mis a faux de la connexion
     }
 }
 std::string Admin::getID()//getter de l'id

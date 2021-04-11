@@ -3,7 +3,7 @@
 #include "windows.h"
 #include "Admin.h"
 ///Aurélien Bon & Nicolas Dreyfus
-void Gotom(int col, int nb) // fonction gotolicol proposé par Mr Fercoq
+void Gotom(int col, int nb) // fonction gotolicol proposée par Mr Fercoq
 {
     COORD mycoord;
     mycoord.X = col;
@@ -53,21 +53,21 @@ int main()
         if(administrateur.getConnect()==false)
             std::cout << "7. Connexion administrateur"<<std::endl;
         else
-            std::cout << "7. Gestion fermeture des pistes"<<std::endl;//si admin connecter
+            std::cout << "7. Gestion fermeture des pistes"<<std::endl;//si admin connecté
         Gotom(4,13);
         if(administrateur.getConnect()==false)
             std::cout << "8. Quitter"<<std::endl;
         else
-            std::cout << "8. Ajouter un compte administrateur"<<std::endl;//si admin connecter
+            std::cout << "8. Ajouter un compte administrateur"<<std::endl;//si admin connecté
         if(administrateur.getConnect()==true)
         {
             Gotom(4,14);
-            std::cout << "9. Deconnexion"<<std::endl;//si admin connecter
+            std::cout << "9. Deconnexion"<<std::endl;//si admin connecté
         }
         if(administrateur.getConnect()==true)
         {
             Gotom(4,15);
-            std::cout << "10. Quitter"<<std::endl;//si admin connecter
+            std::cout << "10. Quitter"<<std::endl;//si admin connecté
         }
 
         if(administrateur.getConnect()==false)
@@ -111,7 +111,7 @@ int main()
             if(administrateur.getConnect()==false)
                 administrateur.Connexion();
             else
-                test.fermeturePiste();//si admin connecter
+                test.fermeturePiste();//si admin connecté
             break;
         case 8:
             if(administrateur.getConnect()==false)
@@ -120,17 +120,17 @@ int main()
                 system("cls");
             }
             else
-                administrateur.CreerCompte();//si admin connecter
+                administrateur.CreerCompte();//si admin connecté
             break;
         case 9:
-            administrateur.Deconnexion();//si admin connecter
+            administrateur.Deconnexion();//si admin connecté
             break;
         case 10:
-            quitter=true;//si admin connecter
+            quitter=true;//si admin connecté
             system("cls");
             break;
         }
     }while(quitter==false);
     return 0;
-    //yo
+
 }

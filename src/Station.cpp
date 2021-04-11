@@ -80,7 +80,7 @@ Station::Station(std::string filename)
         std::string nomLieu, fermer;
         int altitude;
         ifs >> nbLieu >> nomLieu >> altitude >> fermer;
-        Lieu n(nomLieu,nbLieu,altitude);   // on crée le lieu qu 'on push dans notre vec apres la lecture de la ligne
+        Lieu n(nomLieu,nbLieu,altitude);   // on crée le lieu qu'on push dans notre vec apres la lecture de la ligne
         n.setFermeture(fermer);
         m_lieu.push_back(n);
     }
@@ -276,7 +276,7 @@ void Station::AffichagePoint()
     }while(choix<0 || choix>m_nbLieu);
     system("cls");
     Goto(1,5);
-    std::cout<<"Depuis "<<m_lieu[choix-1].getLieu()<<", vous pouvez prendre: "<<std::endl;  // on écupère tous les trajets qui ont comme pt commun, le pt de départ ou le pt d'arrivé identique à notre lieu sélectionné
+    std::cout<<"Depuis "<<m_lieu[choix-1].getLieu()<<", vous pouvez prendre: "<<std::endl;  // on récupère tous les trajets qui ont comme pt commun, le pt de départ ou le pt d'arrivé identique à notre lieu sélectionné
 
     cpt=1;
     for(auto& elem:m_trajet)
@@ -626,7 +626,7 @@ void Station::dijkstra(int debut, int fin)
                 }
             }
         }
-        for(auto& elem:m_lieu)//reactualisation des poids de tout les sommet
+        for(auto& elem:m_lieu)//reactualisation des poids de tout les sommets
         {
             float newTemps=elem.getTemps(); // on recup le time de l'élément étudié
             for(auto& art:m_trajet)     // pour chaque élement récupéré par rapport aux aretes précédentes
@@ -663,7 +663,7 @@ void Station::dijkstra(int debut, int fin)
     {
         int anteDij = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
         std::stack<int> reponse;
-        if(anteDij!=(-1))//si le sommet a des predecesseur
+        if(anteDij!=(-1))//si le sommet a des predecesseurs
         {
             reponse.push(m_lieu[fin-1].getNbLieu());
             while(true)
@@ -679,7 +679,7 @@ void Station::dijkstra(int debut, int fin)
         system("cls");
         int cpt=1;
         Goto(1,cpt+5);
-        std::cout<<"-----------------------------------------------------------------------------------------------------"<<std::endl;      // Affichage du trajet les plus rapides
+        std::cout<<"-----------------------------------------------------------------------------------------------------"<<std::endl;      // Affichage des trajets les plus rapides
         Goto(1,cpt+6);
         std::cout<<"Voici l'itineraire le plus rapide de "<<m_lieu[debut-1].getLieu()<<" jusqu'a "<<m_lieu[fin-1].getLieu()<<" avec le mode "<<m_mode<<" actif:\n "<<std::endl;
         anteDij=reponse.top();
@@ -823,7 +823,7 @@ float Station::CalculTemps(Trajet traj)//meme methode que CalculTempsCoef sans u
     return temps;
 }
 
-void Station::Critere()//methode de selection des critere pour les recherche de trajet
+void Station::Critere()//methode de selection des criteres pour les recherches de trajet
 {
     system("cls");
     Goto(1,5);
@@ -909,7 +909,7 @@ void Station::Critere()//methode de selection des critere pour les recherche de 
     system("cls");
     reecritureFicher();     // on réécrit dans le fichier les nouveaux critères avec retour au menu par la suite,
 }
-void Station::Personnaliser()//methode de selection des critere de facon personnaliser
+void Station::Personnaliser()//methode de selection des critere de facon personnalisée
 {
     int choix;
     do
@@ -1164,7 +1164,7 @@ void Station::Trajet2point()
     do
     {
         std::cin>>choix;
-    }while(choix<0 || choix>2);     //Choix du plus cours chemin en terme d'etape ou de temps
+    }while(choix<0 || choix>2);     //Choix du plus court chemin en terme d'etapes ou de temps
     system("cls");
     Goto(0,3);
     std::cout<<"*************************************************************";
@@ -1227,7 +1227,7 @@ void Station::Trajet2point()
         }while(fin<0 || fin>m_nbLieu||fin==debut);
         system("cls");                  // on fait à l'appel pour chercher le trajet à adopter
         SelectionTrajet();
-        if(bfs(debut,fin)==false)       // utilisation du bfs, si jamais le chemin est inacessible avec les parametre actuel
+        if(bfs(debut,fin)==false)       // utilisation du bfs, si jamais le chemin est inacessible avec les parametres actuels
         {
             Goto(1,5+cpt);
             std::cout << "Impossible d'atteindre le point ";
@@ -1281,7 +1281,7 @@ void Station::Trajet2point()
             std::cout << "\nPour une duree totale de "<<affichageTemps(tempTotal);
         }
     }
-    else//Si le choix est de faire le plus cours chemin en terme de temps
+    else//Si le choix est de faire le plus court chemin en terme de temps
     {
         Goto(0,3);
         std::cout<<"*************************************************************";
@@ -1340,7 +1340,7 @@ void Station::Trajet2point()
         {
             std::cin>>fin;
         }while(fin<0 || fin>m_nbLieu||fin==debut);
-        system("cls");                  // on fait à l'appel pour chercher le trajet à adopter
+        system("cls");                  // on fait l'appel pour chercher le trajet à adopter
         SelectionTrajet();
         for(auto& elem:m_trajet)
         {
@@ -1379,7 +1379,7 @@ void Station::SelectionTrajet()
     {
         elem.setSelec(true);
     }
-    for(auto& elem:m_trajet)//on parcourt toute les aretes et on regarde si elle sont selectionable par rapport a au parametre donner
+    for(auto& elem:m_trajet)//on parcourt toute les aretes et on regarde si elles sont selectionables par rapport au parametre donné
     {
         if(elem.getType()=="V"&&m_coef[0]==200)
         {
@@ -1430,7 +1430,7 @@ void Station::SelectionTrajet()
             elem.setSelec(false);
         }
     }
-    for(auto& elem:m_trajet)//si les piste sont considerer comme fermer alors elle ne sont pas selectionner
+    for(auto& elem:m_trajet)//si les pistes sont considerées comme fermées alors elles ne sont pas selectionnées
     {
         if(elem.getFermeture()=="Fermer")
         {
@@ -1501,7 +1501,7 @@ void Station::FordFercuson()
         std::cin>>fin;
     }while(fin<0 || fin>m_nbLieu||fin==debut);
     system("cls");
-    for(auto& elem:m_trajet)        // on set tout les trajet, le flow a 0
+    for(auto& elem:m_trajet)        // on set tout les trajet, le flow à 0
     {
         elem.setFlow(0);
         elem.setSelec(true);
@@ -1511,9 +1511,9 @@ void Station::FordFercuson()
     int flowmin=0;
     std::queue<float> resultPetit;
     cpt=1;
-    while(bfs(debut,fin)==true)//si chemin trouver (antecedent de lieu fin existant) retourne true , sinon false
+    while(bfs(debut,fin)==true)//si chemin trouvé (antecedent de lieu fin existant) retourne true , sinon false
     {
-        int anteBfs = m_lieu[fin-1].getVisite();//on recupere le predecesseur de chaque sommet
+        int anteBfs = m_lieu[fin-1].getVisite();//on recupère le predecesseur de chaque sommet
         if(anteBfs!=(-1))//si le sommet a des predecesseurs
         {
             resultat.push(m_lieu[fin-1].getNbLieu());
@@ -1522,7 +1522,7 @@ void Station::FordFercuson()
                 if(anteBfs!=(-1))
                 {
                     resultat.push(m_lieu[anteBfs-1].getNbLieu());
-                    anteBfs= m_lieu[anteBfs-1].getVisite();//on recupere le predecesseur de chaque sommet
+                    anteBfs= m_lieu[anteBfs-1].getVisite();//on recupère le predecesseur de chaque sommet
                 }
                 else break;
             }
@@ -1534,15 +1534,15 @@ void Station::FordFercuson()
         int flowmax=9999;
         while(!resultat.empty())//on recupere l'arete avec le moins de flow
         {
-            for(auto& elem:m_trajet)//parcourt de toute les aretes
+            for(auto& elem:m_trajet)//parcours de toute les aretes
             {
-                if(elem.getFin()==r1&&elem.getDebut()==resultat.front()&&elem.getSelec())//si elle a le meme numero de sommet d'arricer que r1 et que sont sommet de depart et l'antecedent du sommet r1 et qu'elle est selectionnable
+                if(elem.getFin()==r1&&elem.getDebut()==resultat.front()&&elem.getSelec())//si elle a le meme numero de sommet d'arriver que r1 et que son sommet de depart et l'antecedent du sommet r1 et qu'elle est selectionnable
                 {
-                    if(elem.getMaxFlow()-elem.getFlow()<flowmax)//si le flow resultant de l'aretes est inferieur a celui trouver actuelement
+                    if(elem.getMaxFlow()-elem.getFlow()<flowmax)//si le flow resultant de l'arete est inferieur a celui trouvé actuelement
                     {
                         flowmax=elem.getMaxFlow()-elem.getFlow();
                     }
-                    resul2.push(elem.getNbTrajet());//on met l'arete trouver dans un vecteur result2
+                    resul2.push(elem.getNbTrajet());//on met l'arete trouvée dans un vecteur result2
                 }
             }
             r1=resultat.front();
@@ -1553,7 +1553,7 @@ void Station::FordFercuson()
         n++;
         Goto(1,11+cpt);
         std::cout << "Trajet n° "<<n<<": "<<std::endl;
-        while(!resul2.empty())//on ajoute le flow a chaque arrete du vecteur result2
+        while(!resul2.empty())//on ajoute le flow a chaque arete du vecteur result2
         {
             r2=resul2.front();
             m_trajet[r2-1].setFlow(m_trajet[r2-1].getFlow()+flowmax);//on ajoute le flow de la ligne
@@ -1568,15 +1568,15 @@ void Station::FordFercuson()
             CouleurReset();
         }
         flowfinal+=flowmax;//on ajoute le flow d'arriver au flow deja trouver
-        for(auto& elem:m_trajet)//on parcours touts les trajet
+        for(auto& elem:m_trajet)//on parcourt tous les trajets
         {
-            if(elem.getFlow()==elem.getMaxFlow())//si sont flow maximal est atteint, on la deselectionne
+            if(elem.getFlow()==elem.getMaxFlow())//si son flow maximal est atteint, on la désélectionne
             {
                 elem.setSelec(false);
             }
         }
     }
-    CouleurReset();//reset des couleur
+    CouleurReset();//reset des couleurs
     Goto(1,5);
     std::cout<<"La capacite maximale du lieu ";//affichage du chemin du point A au point B
     std::cout<<m_lieu[debut-1].getLieu()<<" a ";
@@ -1624,7 +1624,7 @@ void Station::fermeturePiste()
     do{
         std::cin>>nb;                // l'utilisateur fait une saisie d'un choix
     }while(nb<0 || nb>2);
-    if(nb==1)//si choix est de parametrer la fermeture des lieu
+    if(nb==1)//si choix est de parametrer la fermeture des lieux
     {
         system("cls");
         int choix=0;
@@ -1635,7 +1635,7 @@ void Station::fermeturePiste()
 
             for(auto& elem:m_lieu)
             {
-                if(elem.getFermeture()=="Ouvert"){      // on affiche tous les lieu et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
+                if(elem.getFermeture()=="Ouvert"){      // on affiche tous les lieux et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
                     CouleurCase("V");
                 }
                 else{
@@ -1662,10 +1662,10 @@ void Station::fermeturePiste()
             system("cls");
             if(choix!=m_nbLieu+1)//si le choix n'est pas de quitter
             {
-                if(m_lieu[choix-1].getFermeture()=="Fermer")//si le lieu est fermer
+                if(m_lieu[choix-1].getFermeture()=="Fermer")//si le lieu est fermé
                 {
                     m_lieu[choix-1].setFermeture("Ouvert");//on l'ouvre
-                    for(auto& elem:m_trajet)//on ouvre tout les trajet qui en parte est qui y vont
+                    for(auto& elem:m_trajet)//on ouvre tout les trajets qui en partent est qui y vont
                     {
                         if(elem.getDebut()==choix||elem.getFin()==choix)
                         {
@@ -1727,7 +1727,7 @@ void Station::fermeturePiste()
             system("cls");
             if(choix!=m_nbTrajet+1)//Si le choix n'est pas de quitter
             {
-                if(m_trajet[choix-1].getFermeture()=="Fermer")//si le trajet est fermer
+                if(m_trajet[choix-1].getFermeture()=="Fermer")//si le trajet est fermé
                 {
                     m_trajet[choix-1].setFermeture("Ouvert");//on le met a ouvert
                 }
@@ -1770,7 +1770,7 @@ void Station::InfoPiste()
         int cpt=5;
         for(auto& elem:m_lieu)
         {
-            if(elem.getFermeture()=="Ouvert"){      // on affiche tous les lieu et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
+            if(elem.getFermeture()=="Ouvert"){      // on affiche tous les lieux et on met en vert dès que c'est ouvert, autrement en rouge des que c'est fermé
                 CouleurCase("V");
             }
             else{
@@ -1813,7 +1813,7 @@ void Station::InfoPiste()
             cpt++;
         }
     }
-    CouleurReset();//reset des couleur
+    CouleurReset();//reset des couleurs
     leave();//attente de la confirmation de quitter
 }
 

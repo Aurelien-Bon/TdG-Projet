@@ -12,18 +12,18 @@ class Admin
          ~Admin();///destructeur
         void Connexion();//permet de connecter un administrateur
         void Deconnexion();//permet de se deconnecter
-        std::string getID();//geter de ID
+        std::string getID();//getter de ID
         void CreerCompte();//ajout compte admin
         bool getConnect();//getter de m_connecte
 
     protected:
 
     private:
-        std::vector<std::vector<std::string>> m_infoFile;//tout les compte et mot de passe administrateur
-        std::string m_mdp;// mdp de la session actuel
-        std::string m_file;//nom du fichier contenent les mot de passe et nom admin
-        std::string m_idadmin;//nom de la session actuel
-        bool m_connecte;// vrai si une session est connecter
+        std::vector<std::vector<std::string>> m_infoFile;//tous les comptes et mot de passe administrateur
+        std::string m_mdp;// mdp de la session actuelle
+        std::string m_file;//nom du fichier contenant les mots de passes et nom admin
+        std::string m_idadmin;//nom de la session actuelle
+        bool m_connecte;// vrai si une session est connectee
 
 };
 
